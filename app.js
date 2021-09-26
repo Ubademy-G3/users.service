@@ -7,10 +7,10 @@ const express = require('express');
  app.get('/', (req, res) => {
    res.status(200).send({
      success: 'true',
-     message: 'Docker listo.',
+     message: 'Docker nuuevo listo.',
      version: '1.0.0',
    });
  });
  
  app.listen(port);
- console.log('Aplicacion ejecutando en el puerto: ok', port);
+ console.log('Aplicacion ejecutando en el puerto:', port);
