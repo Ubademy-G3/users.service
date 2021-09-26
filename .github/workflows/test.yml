@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy: 
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      #HEROKU_EMAIL: ${{ secrets.HEROKU_MAIL }}
+    needs: [] #run_eslint, run_tests
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build container
+        run: docker build -t api_gateway .
+
+      - name: Log in to Heroku Container Registry
+        run: heroku container:login
+
+      - name: Tag container
+        run: docker tag api_gateway registry.heroku.com/sf-tdp2-gateway/web
+
+      - name: Push container
+        run: docker push registry.heroku.com/sf-tdp2-gateway/web
+
+      - name: Release container
+        run: heroku container:release web --app sf-tdp2-gateway
+
+      - name: Set NODE_ENV to production
+        run: heroku config:set NODE_ENV=production --app sf-tdp2-gateway
