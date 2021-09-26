@@ -18,21 +18,19 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Build container
-        run: docker build -t api_gateway .
+        run: docker build -t users.service .
 
       - name: Log in to Heroku Container Registry
         run: heroku container:login
 
       - name: Tag container
-        run: docker tag api_gateway registry.heroku.com/sf-tdp2-gateway/web
+        run: docker tag users.service registry.heroku.com/staging-users-service/web
     
       - name: Push container
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: docker push registry.heroku.com/sf-tdp2-gateway/web
+        run: docker push registry.heroku.com/staging-users-service/web
 
       - name: Release container
-        run: heroku container:release web --app sf-tdp2-gateway
+        run: heroku container:release web --app staging-users-service
 
       - name: Set NODE_ENV to production
-        run: heroku config:set NODE_ENV=production --app sf-tdp2-gateway
+        run: heroku config:set NODE_ENV=production --app staging-users-service
