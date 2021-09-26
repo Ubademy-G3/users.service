@@ -13,4 +13,4 @@ const express = require('express');
  });
  
  app.listen(port);
- console.log('Aplicacion ejecutando en el puerto:', port);
+ console.log('Aplicacion ejecutando en el puerto: ok', port);
