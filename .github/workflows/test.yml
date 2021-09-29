@@ -9,19 +9,19 @@ on:
 jobs:
     run_eslint:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
+    steps:
+      - uses: actions/checkout@master
 
-        - name: Use Node.js
-          uses: actions/setup-node@v1
-          with:
-            node-version: '14.x'
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
 
-        - name: Install dependencies
-          run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-        - name: Run linter
-          run: npm run lint 
+      - name: Run linter
+        run: npm run lint 
 
     run_tests:
       runs-on: ubuntu-latest
