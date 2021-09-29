@@ -10,6 +10,10 @@
     "test": "jest",
     "test:coverage": "jest --verbose --coverage"
   },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ubademy-G3/users.service.git"
