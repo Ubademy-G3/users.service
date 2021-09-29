@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon",
-    "lint": "eslint --ext .js,.html -f ./node_modules/eslint-friendly-formatter . --fix",
+    "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
     "start": "node app.js",
     "test": "jest && codecov",
     "test:coverage": "jest --verbose --coverage"
@@ -23,9 +23,9 @@
   "homepage": "https://github.com/Ubademy-G3/users.service#readme",
   "devDependencies": {
     "codecov": "^3.8.3",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2",
     "husky": "^2.3.0",
     "jest": "^27.2.4",
     "nodemon": "^1.19.1"
