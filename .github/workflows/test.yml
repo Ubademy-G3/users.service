@@ -55,7 +55,7 @@ jobs:
           run: npm run test:coverage 
         
         - name: Codecov
-          run: codecov -t ${{CODECOV_TOKEN}} -f ./coverage/clover.xml
+          run: codecov -t ${{secrets.CODECOV_TOKEN}} -f ./coverage/clover.xml
 
         # Runs only when push/pr to main
         - uses: codecov/codecov-action@v1
