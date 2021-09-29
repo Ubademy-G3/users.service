@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      #HEROKU_EMAIL: ${{ secrets.HEROKU_MAIL }}
     needs: [] #run_eslint, run_tests
     steps:
       - uses: actions/checkout@master
@@ -53,12 +52,6 @@ jobs:
 
         - name: Run tests
           run: npm run test:coverage 
-          
-        - name: Installing codecov
-          run: npm install codecov
-        
-        - name: Codecov
-          run: codecov -t ${{secrets.CODECOV_TOKEN}} -f ./coverage/clover.xml
 
         # Runs only when push/pr to main
         - uses: codecov/codecov-action@v1
