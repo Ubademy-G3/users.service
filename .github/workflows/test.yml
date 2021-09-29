@@ -53,6 +53,9 @@ jobs:
 
         - name: Run tests
           run: npm run test:coverage 
+          
+        - name: Installing codecov
+          run: npm install codecov
         
         - name: Codecov
           run: codecov -t ${{secrets.CODECOV_TOKEN}} -f ./coverage/clover.xml
