@@ -8,11 +8,7 @@
     "lint": "eslint --ext .js,.html -f ./node_modules/eslint-friendly-formatter . --fix",
     "start": "node app.js",
     "test": "jest",
-    "test:coverage": "jest --verbose --coverage"
-  },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "test:coverage": "jest --verbose --coverage && codecov"
   },
   "repository": {
     "type": "git",
