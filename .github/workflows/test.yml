@@ -8,20 +8,20 @@ on:
 
 jobs:
     run_eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@master
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
+        - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '14.x'
 
-      - name: Install dependencies
-        run: npm ci
+        - name: Install dependencies
+          run: npm ci
 
-      - name: Run linter
-        run: npm run lint 
+        - name: Run linter
+          run: npm run lint 
 
     run_tests:
       runs-on: ubuntu-latest
@@ -47,30 +47,29 @@ jobs:
           if: ${{ github.ref == 'refs/heads/main' }}
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
-            
-  deploy: 
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-    needs: [run_eslint, run_tests]
-    steps:
-      - uses: actions/checkout@master
+    deploy: 
+      if: ${{ github.ref == 'refs/heads/main' }}
+      runs-on: ubuntu-latest
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      needs: [run_eslint, run_tests]
+      steps:
+        - uses: actions/checkout@master
 
-      - name: Build container
-        run: docker build -t users.service .
+        - name: Build container
+          run: docker build -t users.service .
 
-      - name: Log in to Heroku Container Registry
-        run: heroku container:login
+        - name: Log in to Heroku Container Registry
+          run: heroku container:login
 
-      - name: Tag container
-        run: docker tag users.service registry.heroku.com/staging-users-service/web
-    
-      - name: Push container
-        run: docker push registry.heroku.com/staging-users-service/web
+        - name: Tag container
+          run: docker tag users.service registry.heroku.com/staging-users-service/web
 
-      - name: Release container
-        run: heroku container:release web --app staging-users-service
+        - name: Push container
+          run: docker push registry.heroku.com/staging-users-service/web
 
-      - name: Set NODE_ENV to production
-        run: heroku config:set NODE_ENV=production --app staging-users-service
+        - name: Release container
+          run: heroku container:release web --app staging-users-service
+
+        - name: Set NODE_ENV to production
+          run: heroku config:set NODE_ENV=production --app staging-users-service
