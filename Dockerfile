@@ -6,7 +6,7 @@ COPY package* /app/
 
 RUN npm install
 
-COPY index.js /app/
+COPY app.js /app/
 
 ENV PORT=3000
 
