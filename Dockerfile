@@ -21,7 +21,7 @@ RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 WORKDIR /app
 
 #ADD monitoring/ monitoring/
-COPY heroku-entrypoint.sh ./
+COPY /deploy/ ./
 
 COPY package* /app/
 
@@ -43,6 +43,6 @@ ENV DD_APM_ENABLED=true
 ##CMD npm start
 
 # Copy Datadog configuration
-COPY datadog.yml /etc/datadog-agent/
+COPY /monitoring/ /etc/datadog-agent/
 # Use heroku entrypoint
 CMD ["bash", "heroku-entrypoint.sh"]
