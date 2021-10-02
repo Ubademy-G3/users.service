@@ -40,7 +40,7 @@ ENV DD_APM_ENABLED=true
 
 #ENTRYPOINT ["node", "app.js"]
 
-#CMD npm start
+##CMD npm start
 
 # Copy Datadog configuration
 COPY datadog.yml /etc/datadog-agent/
