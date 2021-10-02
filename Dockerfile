@@ -10,8 +10,8 @@ COPY app.js /app/
 
 ENV PORT=3000
 
-EXPOSE $PORT
+EXPOSE 3000
 
-ENTRYPOINT ["node", "app.js"]
+#ENTRYPOINT ["node", "app.js"]
 
-#CMD npm start
+CMD npm start
