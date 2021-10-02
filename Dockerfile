@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 
 WORKDIR /app
 
-ADD monitoring/ monitoring/
+#ADD monitoring/ monitoring/
 COPY heroku/heroku-entrypoint.sh ./
 
 COPY package* /app/
