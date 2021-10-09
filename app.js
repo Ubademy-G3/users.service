@@ -7,9 +7,6 @@ const client = new Client({
   connectionString: process.env.DATABASE_URL,
   query_timeout: 1000,
   statement_timeout: 1000,
-  ssl: {
-    rejectUnauthorized: false
-  }
 });
 client.connect();
 
