@@ -5,6 +5,7 @@ services:
     container_name: psql-container
     environment:
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     networks:
       - my-network
 
