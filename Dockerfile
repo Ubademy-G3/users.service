@@ -45,4 +45,4 @@ ENV DD_APM_ENABLED=true
 # Copy Datadog configuration
 COPY /monitoring/ /etc/datadog-agent/
 # Use heroku entrypoint
-CMD ["bash", "heroku-entrypoint.sh"]
+CMD ["sh", "heroku-entrypoint.sh"]
