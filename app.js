@@ -2,6 +2,7 @@ const express = require('express');
 const { Client } = require('pg');
 
 const app = express();
+
 var client;
 if (process.env.NODE_ENV !== 'stage') {
     client = new Client({
