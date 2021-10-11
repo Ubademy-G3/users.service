@@ -29,6 +29,8 @@ RUN npm install
 
 COPY app.js /app/
 
+COPY /infrastructure/ /app/infrastructure/
+
 ENV PORT=3000
 
 #EXPOSE 3000

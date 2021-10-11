@@ -3,7 +3,7 @@ const { Client } = require('pg');
 
 const app = express();
 
-var users = require('infrastructure/routes/users.js');
+const users = require('./infrastructure/routes/users.js');
 
 var client;
 if (process.env.NODE_ENV !== 'stage') {
