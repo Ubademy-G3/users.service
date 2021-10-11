@@ -3,6 +3,8 @@ const { Client } = require('pg');
 
 const app = express();
 
+var users = require('infrastructure/routes/users.js');
+
 var client;
 if (process.env.NODE_ENV !== 'stage') {
     client = new Client({
@@ -23,6 +25,8 @@ if (process.env.NODE_ENV !== 'stage') {
 }
 
 client.connect();
+
+app.use('/users', users);
 
 app.get('/ping', (req, res) => res.send('Pong!'));
 
