@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon -L",
     "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
     "start": "node app.js",
     "test": "jest && codecov",

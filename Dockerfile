@@ -21,7 +21,7 @@ RUN apt-get update && apt-get -y --force-yes install --reinstall datadog-agent
 WORKDIR /app
 
 #ADD monitoring/ monitoring/
-COPY /deploy/ /app/
+COPY /deploy/ ./
 
 COPY package* /app/
 
