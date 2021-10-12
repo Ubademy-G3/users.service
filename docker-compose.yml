@@ -8,6 +8,7 @@ services:
       - POSTGRES_USER=postgres
     networks:
       - my-network
+    restart: always
 
   node:
     build: .

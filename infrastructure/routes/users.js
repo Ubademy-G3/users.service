@@ -9,11 +9,11 @@ var router = express.Router();
 
 // Home page route
 router.get('/', function(req, res) {
-  res.send('Página de inicio Wiki');
+  res.send('Página de inicio');
 });
 
 // Id page route
-router.get('/{id}', function(req, res) {
+router.get('/:id', function(req, res) {
   res.send('Acerca de esta wiki');
 });
 
