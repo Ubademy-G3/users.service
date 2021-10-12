@@ -2,10 +2,14 @@ version: '3'
 services: 
   postgres:
     image: postgres
-    container_name: psql-container
+    container_name: postgres
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
+    expose:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     networks:
       - my-network
     restart: always
@@ -15,14 +19,30 @@ services:
     container_name: node
     environment:
       - PORT=3000
-      - DATABASE_URL=postgres://postgres:postgres@psql-container:5432/postgres
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/postgres
     ports:
       - 3000:3000
     depends_on:
       - postgres
     networks:
       - my-network
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=80
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    links:
+      - "postgres:pgsql-server"
 
 networks:
   my-network:
     driver: bridge
+
+volumes:
+  postgres_data:
