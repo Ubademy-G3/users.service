@@ -1,5 +1,7 @@
 const express = require('express');
 const { Client } = require('pg');
+var swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
 
 const app = express();
 
@@ -27,6 +29,8 @@ if (process.env.NODE_ENV !== 'stage') {
 client.connect();
 
 app.use('/users', users);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/ping', (req, res) => res.send('Pong!'));
 
