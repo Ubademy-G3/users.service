@@ -5,14 +5,14 @@ let database = null;
 
 if (process.env.NODE_ENV !== "stage") {
   
-  database = new Sequelize(process.envDATABASE_URL,{
+  database = new Sequelize(process.env.DATABASE_URL,{
     dialect: 'postgres',
 		operatorsAliases: Sequelize.Op,
 		define: {timestamp: false}
   })
 
 } else {
-  database = new Sequelize(DATABASE_URL ,{
+  database = new Sequelize(process.env.DATABASE_URL ,{
 		dialect: 'postgres',
 		operatorsAliases: Sequelize.Op,
 	  define: { timestamp: false },
@@ -31,7 +31,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = database;
 
-db.users = require("Sequelize")(database, Sequelize);
+db.users = require("./Sequelize")(database, Sequelize);
 
-module.exports = database 
+module.exports = db 
 

@@ -2,13 +2,14 @@ const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const users = require("./infrastructure/routes/Users");
-const db = require("/infrastructure/db");
-require("/infrastrucure/routes/Users")(app);
-//const cors = require("cors");
+const db = require("./infrastructure/db/Database");
+//require("./infrastrucure/routes/Users")(app);
+const cors = require("cors");
 
-/*var corsOptions = {
+var corsOptions = {
   origin: "http://localhost:3000"
-};
+}; 
+const app = express();
 
 app.use(cors(corsOptions));
 
@@ -16,9 +17,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));*/
-
-const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", users);
 

@@ -1,5 +1,6 @@
 const UserModel = require("../../domain/UserModel");
 const db = require("../../infrastructure/db/Database");
+const UserRepository = require("../../domain/UserRepository")
 const User = db.users;
 const Op = db.Sequelize.Op;
 

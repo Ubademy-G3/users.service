@@ -4,7 +4,8 @@ module.exports = (database, Sequelize) => {
   const User = database.define("user", {
     id: {
       type: Sequelize.UUID,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     email: {
       type: Sequelize.STRING
@@ -22,7 +23,7 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING
     },
     interests: {
-      type: Sequelize.ARRAY(DataTypes.STRING)
+      type: Sequelize.ARRAY(Sequelize.STRING)
     },
     profilePictureUrl: {
       type: Sequelize.STRING
@@ -34,10 +35,10 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING
     },
     favoriteCourses: {
-      type: Sequelize.ARRAY(DataTypes.UUID)
+      type: Sequelize.ARRAY(Sequelize.UUID)
     },
     coursesHistory: {
-      type: Sequelize.ARRAY(DataTypes.UUID)
+      type: Sequelize.ARRAY(Sequelize.UUID)
     }
   });
 

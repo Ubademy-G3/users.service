@@ -1,3 +1,4 @@
+const { restart } = require("nodemon");
 const create = require("../useCases/CreateNewUser");
 
 // Create and Save a new User
@@ -11,6 +12,11 @@ exports.create = (req, res) => {
   }*/
 
   // Create a User
+  const ApiKey = req.get("authorization");
+  if (ApiKey !== process.env.USERSERVICE_APIKEY){
+    return res.status(401,"Unauthorized");
+  }
+
   const NewUser = create(req.body);
   
 

@@ -8,19 +8,19 @@ const users = require("../../application/controllers/UserController");
 router.post("/", users.create);
 
 // Retrieve all users
-router.get("/", users.findAll);
+//router.get("/", users.findAll);
 
 // Retrieve a single user with id
-router.get("/:id", users.findOne);
+//router.get("/:id", users.findOne);
 
 // Update a user with id
-router.put("/:id", users.update);
+//router.put("/:id", users.update);
 
 // Delete a user with id
-router.delete("/:id", users.delete);
+//router.delete("/:id", users.delete);
 
 // Delete all users
-router.delete("/", users.deleteAll);
+//router.delete("/", users.deleteAll);
 
 module.exports = router;
 
