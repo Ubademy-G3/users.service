@@ -3,6 +3,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const users = require("./infrastructure/routes/Users");
 const db = require("./infrastructure/db/Database");
+require("dotenv").config();
 const cors = require("cors");
 
 const app = express();

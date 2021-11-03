@@ -1,8 +1,10 @@
 const UserModel = require("../../domain/UserModel");
 const db = require("../../infrastructure/db/Database");
-const UserRepository = require("../../domain/UserRepository")
+const UserRepository = require("../../domain/UserRepository");
+const User = require("../../domain/UserModel");
 const UserDb = db.users;
-const Op = db.Sequelize.Op;
+//thats for operators like or, and, ecc. in conditionals like findAll where
+//const Op = db.Sequelize.Op;
 
 module.exports = class extends UserRepository {
     static async createUser(userInfo){
@@ -18,58 +20,115 @@ module.exports = class extends UserRepository {
             subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
             favoriteCourses: userInfo.favoriteCourses,
             coursesHistory: userInfo.coursesHistory
-          };
+        };
 
         //combines the build and save methods
-        const newUser = UserDb.create(user);
-            
+        const newUser = await UserDb.create(user);       
 
         return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName, newUser.rol,
             newUser.location, newUser.interests, newUser.profilePictureUrl, newUser.subscription,
             newUser.subscriptionExpirationDate, newUser.favoriteCourses, newUser.coursesHistory);        
     }
 
-    getUser(id){
-        throw new Error("Method Not implemented");
+    static async getUser(id){
+        const result = await UserDb.findAll({
+            where: {
+               id: id
+            }
+        });
+
+        const user = result[0];
+        
+        if(user && Object.keys(user).length !== 0){
+            return new UserModel(
+                user.id,
+                user.email,
+                user.firstName,
+                user.lastName,
+                user.rol,
+                user.location,
+                user.interests,
+                user.profilePictureUrl,
+                user.subscription,
+                user.subscriptionExpirationDate,
+                user.favoriteCourses,
+                user.coursesHistory
+                )
+        }
+        return null;        
     }
 
     static async getByEmail(email) {
-        const user = await UserDb.findOne(email);
-        console.log(email)
-        console.log(user)
-        if (user) {
-          return new UserModel(
-            user.id,
-            user.email,
-            user.firstName,
-            user.lastName,
-            user.rol,
-            user.location,
-            user.interests,
-            user.profilePictureUrl,
-            user.subscription,
-            user.subscriptionExpirationDate,
-            user.favoriteCourses,
-            user.coursesHistory
+        const result = await UserDb.findAll({
+            where: {
+               email: email
+            }
+        });
+
+        const user = result[0];
+        
+        
+        if (user && Object.keys(user).length !== 0) {
+            return new UserModel(
+                user.id,
+                user.email,
+                user.firstName,
+                user.lastName,
+                user.rol,
+                user.location,
+                user.interests,
+                user.profilePictureUrl,
+                user.subscription,
+                user.subscriptionExpirationDate,
+                user.favoriteCourses,
+                user.coursesHistory
           );
         }
         return null;
     }
 
     static async  getAllUsers(){
-        const allUsers = UserDb.findAll();
-        return allUsers;
+        return await UserDb.findAll();        
     }
 
-    removeUser(id){
-        throw new Error("Method Not implemented");
+    static async removeUser(id){
+        return await UserDb.destroy({
+            where: {
+                id: id
+            }
+        });
     }
 
-    removeAllUsers(){
-        throw new Error("Method Not implemented");
-    }
+    static async removeAllUsers(){
+        return await UserDb.destroy({
+            where: {},
+            truncate: false
+          })        
+        };
 
-    updateUser(user){
-        throw new Error("Method Not implemented");
+    static async updateUser(userInfo){
+        const updatedUser = await UserDb.update({
+            email: userInfo.email,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            rol: userInfo.rol,
+            location: userInfo.location,
+            interests: userInfo.interests,
+            profilePictureUrl: userInfo.profilePictureUrl,
+            subscription: userInfo.subscription,
+            subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
+            favoriteCourses: userInfo.favoriteCourses,
+            coursesHistory: userInfo.coursesHistory
+            },
+            {
+                where: {
+                    id: userInfo.id
+                }
+        });            
+
+        return new UserModel(updatedUser.id, updatedUser.email, updatedUser.firstName, updatedUser.lastName, updatedUser.rol,
+            updatedUser.location, updatedUserr.interests, updatedUser.profilePictureUrl, updatedUser.subscription,
+            updatedUser.subscriptionExpirationDate, updatedUser.favoriteCourses, updatedUser.coursesHistory);        
     }
+    
 }   

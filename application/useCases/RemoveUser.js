@@ -6,13 +6,9 @@ module.exports = async (repository, params) => {
         throw new BadRequest("Missing required field");
     }
 
-    const user = await repository.getUser(params.id);
+    const user = await repository.removeUser(params.id);
     if (!user) {
         throw new UserNotFound("User Id not found");
     }
-    try {
-        return user;
-    } catch (err) {
-        throw new UnexpectedError(`Unexpected error happened when getting user ${err}`);
-    }
+    return { message: "User deleted successfully" };
 };
