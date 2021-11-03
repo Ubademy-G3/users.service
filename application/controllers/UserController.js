@@ -1,23 +1,33 @@
 const { restart } = require("nodemon");
 const create = require("../useCases/CreateNewUser");
+const findAll = require("../useCases/GetAllUsers");
+const { BadRequest } = require("../../errors/BadRequest");
+const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
+const { UserNotFound } = require("../../errors/UserNotFound");
+const serializer = require("../serializers/UserSerializer");
 
 // Create and Save a new User
-exports.create = (req, res) => {
-  // Validate request
-  /*if (!req.body.title) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }*/
+exports.create = async (req, res) => {
+  // Validate request  
 
-  // Create a User
-  const ApiKey = req.get("authorization");
-  if (ApiKey !== process.env.USERSERVICE_APIKEY){
+  const apiKey = req.get("authorization");
+  if (apiKey !== process.env.USERSERVICE_APIKEY){
     return res.status(401,"Unauthorized");
-  }
+  } else {
 
-  const NewUser = create(req.body);
+    const repository = req.app.serviceLocator.userRepository;
+
+    create(repository, req.body)
+      .then(user => res.status(200).json(serializer(user)))
+      .catch(err => {
+        if (err instanceof UserAlreadyExists) {
+          return res.status(409).send({ message: err.message });
+        }
+        if (err instanceof BadRequest) {
+          return res.status(400).send({ message: err.message });
+        }
+        return res.status(500).send({ message: err.message });
+      });
   
 
   // Save User in the database
@@ -31,25 +41,28 @@ exports.create = (req, res) => {
           err.message || "Some error occurred while creating the User."
       });
     });*/
-    return res.json(NewUser);
+  }
 };
-/*
-// Retrieve all Users from the database.
-exports.findAll = (req, res) => {
-  const id = req.query.id;
-  var condition = id ? { id: { [Op.iLike]: `%${id}%` } } : null;
 
-  User.findAll()
-    .then(data => {
-      res.send(data);
-    });/*
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving users."
-      });
-    });*/
-//};
+// Retrieve all Users from the database.
+exports.findAll = async (req, res) => {
+  //const id = req.query.id;
+  //var condition = id ? { id: { [Op.iLike]: `%${id}%` } } : null;
+
+  const apiKey = req.get("authorization");
+  if (apiKey !== process.env.USERSERVICE_APIKEY){
+    return res.status(401,"Unauthorized");
+  } else {
+
+    const repository = req.app.serviceLocator.userRepository;
+
+    findAll(repository)
+      .then(users => res.status(200).json(serializer(users))) 
+      .catch(err => {
+        return res.status(500).send({ message: err.message });
+      });      
+  }
+};
 /*
 // Find a single User with an id
 exports.findOne = (req, res) => {

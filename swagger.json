@@ -3,22 +3,23 @@
     "info": {
         "version": "1.0.0",
         "title": "Users Service API",
-        "description": "",
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        }
+        "description": ""
     },
-    "host": "localhost:3000",
-    "basePath": "/api/users",
+    "host": "",
+    "basePath": "/",
     "tags": [
         {
             "name": "Users",
-            "description": "API for users in the system"
+            "description": ""
+        },
+        {
+            "name": "Users",
+            "description": ""
         }
     ],
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -28,73 +29,161 @@
     ],
     "paths": {
         "/users": {
-            "get": {
-                "tags": [
-                    "Users"
+            "post": {
+                "tags": ["Users"],
+                "summary": "Creates new user",
+                "description": "Returns created user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user to create",
+                        "schema": {
+                            "required": [
+                                "email",
+                                "firstName",
+                                "lastName"
+                            ],
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "rol": {
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "interests": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "profilePictureUrl": {
+                                    "type": "string"
+                                },
+                                "subscription": {
+                                    "type": "string"
+                                },
+                                "subscriptionExpirationDate": {
+                                    "type": "string"
+                                },
+                                "favoriteCourses": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "coursesHistory": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header"
+                    }
                 ],
-                "summary": "Get all users in system",
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Created user",
                         "schema": {
-                            "$ref": "#/definitions/Users"
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "secondName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get all registered users",
+                "description": "Returns a list containing all users",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of users",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "secondName": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
             }
-        },
-        "/users/{userId}": {
-            "parameters": [
-                {
-                    "name": "userId",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID of user that we want to find",
-                    "type": "string"
-                }
-            ],
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get user with given ID",
-                "responses": {
-                    "200": {
-                        "description": "User is found",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "User": {
-            "required": [
-                "email",
-                "id"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "uniqueItems": true
-                },
-                "email": {
-                    "type": "string",
-                    "uniqueItems": true
-                },
-                "lastName": {
-                    "type": "string"
-                },
-                "firstName": {
-                    "type": "string"
-                }
-            }
-        },
-        "Users": {
-            "type": "array",
-            "$ref": "#/definitions/User"
         }
     }
-}
+}   
+   

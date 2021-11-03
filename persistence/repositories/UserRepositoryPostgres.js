@@ -1,61 +1,64 @@
 const UserModel = require("../../domain/UserModel");
 const db = require("../../infrastructure/db/Database");
 const UserRepository = require("../../domain/UserRepository")
-const User = db.users;
+const UserDb = db.users;
 const Op = db.Sequelize.Op;
 
-//const client = require("../infrastructure/db/Database");
-
-module.export = class extends UserRepository {
-    constructor(){
-        super();
-    }
-
-    createUser(body){
-        const UserBody = {    
-            id: body.id,
-            email: body.email,
-            firstName: body.firstName,
-            lastName: body.lastName,
-            rol: body.rol,
-            location: body.location,
-            interests: body.interests,
-            profilePictureUrl: body.profilePictureUrl,
-            subscription: body.subscription,
-            subscriptionExpirationDate: body.subscriptionExpirationDate,
-            favoriteCourses: body.favoriteCourses,
-            coursesHistory: body.coursesHistory
+module.exports = class extends UserRepository {
+    static async createUser(userInfo){
+        const user = {    
+            email: userInfo.email,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            rol: userInfo.rol,
+            location: userInfo.location,
+            interests: userInfo.interests,
+            profilePictureUrl: userInfo.profilePictureUrl,
+            subscription: userInfo.subscription,
+            subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
+            favoriteCourses: userInfo.favoriteCourses,
+            coursesHistory: userInfo.coursesHistory
           };
-        const NewUser = User.create(UserBody)
-            .then(data => {
-            res.send(data);
-            });
-        /*const {UUID, email, first_name, last_name, rol,
-            location, interests, profile_picture_url, subscription,
-            subscription_expiration_date, favorite_courses, courses_history} = user;
-        const NewUser = await client.query(
-            "INSERT INTO users (UUID, email, first_name, last_name, rol,\
-            location, interests, profile_picture_url, subscription,\
-            subscription_expiration_date, favorite_courses, courses_history) \
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-            [UUID, email, first_name, last_name, rol,
-            location, interests, profile_picture_url, subscription,
-            subscription_expiration_date, favorite_courses, courses_history])*/
 
-        return new UserModel(NewUser.id, NewUser.email, NewUser.firstName, NewUser.lastName, NewUser.rol,
-            NewUser.location, NewUser.interests, NewUser.profilePictureUrl, NewUser.subscription,
-            NewUser.subscriptionExpirationDate, NewUser.favoriteCourses, NewUser.coursesHistory);        
+        //combines the build and save methods
+        const newUser = UserDb.create(user);
+            
+
+        return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName, newUser.rol,
+            newUser.location, newUser.interests, newUser.profilePictureUrl, newUser.subscription,
+            newUser.subscriptionExpirationDate, newUser.favoriteCourses, newUser.coursesHistory);        
     }
 
     getUser(id){
-        /*const response = await client.query(
-            'SELECT * FROM products WHERE productid = $1', [productId]); 
-        return response;*/
         throw new Error("Method Not implemented");
     }
 
-    getAllUsers(){
-        throw new Error("Method Not implemented");
+    static async getByEmail(email) {
+        const user = await UserDb.findOne(email);
+        console.log(email)
+        console.log(user)
+        if (user) {
+          return new UserModel(
+            user.id,
+            user.email,
+            user.firstName,
+            user.lastName,
+            user.rol,
+            user.location,
+            user.interests,
+            user.profilePictureUrl,
+            user.subscription,
+            user.subscriptionExpirationDate,
+            user.favoriteCourses,
+            user.coursesHistory
+          );
+        }
+        return null;
+    }
+
+    static async  getAllUsers(){
+        const allUsers = UserDb.findAll();
+        return allUsers;
     }
 
     removeUser(id){

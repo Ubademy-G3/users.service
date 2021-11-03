@@ -1,25 +1,29 @@
 module.exports = class Repository{
-    createUser(user){
+    static createUser(body){
         throw new Error("Method Not implemented");
     }
 
-    getUser(id){
+    static getUser(id){
         throw new Error("Method Not implemented");
     }
 
-    getAllUsers(){
+    static getAllUsers(){
         throw new Error("Method Not implemented");
     }
 
-    removeUser(id){
+    static removeUser(id){
         throw new Error("Method Not implemented");
     }
 
-    removeAllUsers(){
+    static removeAllUsers(){
         throw new Error("Method Not implemented");
     }
 
-    updateUser(user){
+    static updateUser(user){
+        throw new Error("Method Not implemented");
+    }
+
+    static getByEmail(email){
         throw new Error("Method Not implemented");
     }
 

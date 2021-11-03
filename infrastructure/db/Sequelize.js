@@ -5,7 +5,8 @@ module.exports = (database, Sequelize) => {
     id: {
       type: Sequelize.UUID,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      defaultValue: Sequelize.UUIDV4
     },
     email: {
       type: Sequelize.STRING
@@ -35,10 +36,10 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING
     },
     favoriteCourses: {
-      type: Sequelize.ARRAY(Sequelize.UUID)
+      type: Sequelize.ARRAY(Sequelize.INTEGER)
     },
     coursesHistory: {
-      type: Sequelize.ARRAY(Sequelize.UUID)
+      type: Sequelize.ARRAY(Sequelize.INTEGER)
     }
   });
 
