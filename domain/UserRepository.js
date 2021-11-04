@@ -27,4 +27,8 @@ module.exports = class Repository{
         throw new Error("Method Not implemented");
     }
 
+    static patchUser(id, body){
+        throw new Error("Method Not implemented");
+    }
+
 }

@@ -11,10 +11,9 @@ module.exports = async (repository, params, userInfo) => {
     if (!userNotFound) {
         throw new UserNotFound("User not found with given email");
     }
-    const user = userInfo;
-    user.id = params.id;
+    
     try {
-        const result = repository.updateUser(user);
+        const result = repository.patchUser(params.id, userInfo);
         if(result){
             return { message: "User updated successfully" };
         }

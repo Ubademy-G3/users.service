@@ -560,52 +560,102 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "An updated user",
+                        "description": "Deleted response",
                         "schema": {
-                            "id": {
-                                "type": "integer",
-                                "format":"uuid"
-                            },
-                            "email": {
-                                "type": "string"
-                            },
-                            "firstName": {
-                                "type": "string"
-                            },
-                            "lastName": {
-                                "type": "string"
-                            },
-                            "rol": {
-                                "type": "string"
-                            },
-                            "location": {
-                                "type": "string"
-                            },
-                            "interests": {
-                                "type": "array",
-                                "items": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
                                     "type": "string"
                                 }
-                            },
-                            "profilePictureUrl": {
-                                "type": "string"
-                            },
-                            "subscription": {
-                                "type": "string"
-                            },
-                            "subscriptionExpirationDate": {
-                                "type": "string"
-                            },
-                            "favoriteCourses": {
-                                "type": "array",
-                                "items": {
-                                    "type": "integer"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Users"],
+                "summary": "Patch user by id",
+                "description": "Returns updated user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to patch",
+                        "required": true
+                    },
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Field to be updated",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "rol": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "subscription": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "subscriptionExpirationDate": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "favoriteCourses": {
+                                    "type": "array",
+                                    "require": false,
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "coursesHistory": {
+                                    "type": "array",
+                                    "require": false,
+                                    "items": {
+                                        "type": "integer"
+                                    }
                                 }
-                            },
-                            "coursesHistory": {
-                                "type": "array",
-                                "items": {
-                                    "type": "integer"
+                            }
+                        }
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted response",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string"
                                 }
                             }
                         }

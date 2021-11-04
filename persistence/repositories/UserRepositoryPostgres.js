@@ -111,7 +111,7 @@ module.exports = class extends UserRepository {
         };
 
     static async updateUser(userInfo){
-        const updatedUser = await UserDb.update({
+        return await UserDb.update({
             email: userInfo.email,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
@@ -128,11 +128,16 @@ module.exports = class extends UserRepository {
                 where: {
                     id: userInfo.id
                 }
-        });            
-
-        return new UserModel(updatedUser.id, updatedUser.email, updatedUser.firstName, updatedUser.lastName, updatedUser.rol,
-            updatedUser.location, updatedUserr.interests, updatedUser.profilePictureUrl, updatedUser.subscription,
-            updatedUser.subscriptionExpirationDate, updatedUser.favoriteCourses, updatedUser.coursesHistory);        
+        });        
     }
-    
+
+    static async patchUser(id, params){
+        return await UserDb.update(params,
+            {
+                where: {
+                    id: id
+                }
+            }
+        ); 
+    }    
 }   

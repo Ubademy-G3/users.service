@@ -6,6 +6,7 @@ const getUserById = require("../useCases/GetUserById");
 const removeAllUsers = require("../useCases/RemoveAllUsers");
 const removeUser = require("../useCases/RemoveUser");
 const updateUser = require("../useCases/UpdateUser");
+const patchUser = require("../useCases/PatchUser");
 
 const { BadRequest } = require("../../errors/BadRequest");
 const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
@@ -78,12 +79,33 @@ exports.update = (req, res) => {
         const repository = req.app.serviceLocator.userRepository;
 
         updateUser(repository, req.params, req.body)
-            .then((user) => res.status(200).json(serializer(user)))
+            .then((msg) => res.status(200).json(msg))
             .catch((err) => {
-                if (err instanceof NotFoundError) {
+                if (err instanceof UserNotFound) {
                     return res.status(404).send({ message: err.message });
                 }
-                if (err instanceof BadRequestError) {
+                if (err instanceof BadRequest) {
+                    return res.status(400).send({ message: err.message });
+                }
+            return res.status(500).send({ message: err.message });
+        });
+    }
+};
+
+exports.patch = (req, res) => {    
+    const apiKey = req.get("authorization");
+    if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
+        return res.status(401).send({message : "Unauthorized"});
+    } else {
+        const repository = req.app.serviceLocator.userRepository;
+
+        patchUser(repository, req.params, req.body)
+            .then((msg) => res.status(200).json(msg))
+            .catch((err) => {
+                if (err instanceof UserNotFound) {
+                    return res.status(404).send({ message: err.message });
+                }
+                if (err instanceof BadRequest) {
                     return res.status(400).send({ message: err.message });
                 }
             return res.status(500).send({ message: err.message });
@@ -101,10 +123,10 @@ exports.delete = (req, res) => {
         removeUser(repository, req.params)
             .then((msg) => res.status(200).json(msg))
             .catch((err) => {
-                if (err instanceof NotFoundError) {
+                if (err instanceof UserNotFound) {
                     return res.status(404).send({ message: err.message });
                 }
-                if (err instanceof BadRequestError) {
+                if (err instanceof BadRequest) {
                     return res.status(400).send({ message: err.message });
                 }
             return res.status(500).send({ message: err.message });
@@ -120,7 +142,7 @@ exports.deleteAll = (req, res) => {
     const repository = req.app.serviceLocator.userRepository;
 
     removeAllUsers(repository)
-      	.then(users => res.status(200).json(serializer(users))) 
+      	.then(msg => res.status(200).json(msg)) 
       	.catch(err => {
        		return res.status(500).send({ message: err.message });
      	});      
