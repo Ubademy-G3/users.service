@@ -2,7 +2,7 @@ const { restart } = require("nodemon");
 
 const createUser = require("../useCases/CreateNewUser");
 const getAllUsers = require("../useCases/GetAllUsers");
-const getUser = require("../useCases/GetUser");
+const getUserById = require("../useCases/GetUserById");
 const removeAllUsers = require("../useCases/RemoveAllUsers");
 const removeUser = require("../useCases/RemoveUser");
 const updateUser = require("../useCases/UpdateUser");
@@ -31,6 +31,7 @@ exports.create = async (req, res) => {
     	if (err instanceof BadRequest) {
         	return res.status(400).send({ message: err.message });
     	}
+        console.log(err);
         return res.status(500).send({ message: err.message });
     	});
   	}
@@ -42,23 +43,23 @@ exports.getAll = async (req, res) => {
 	if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY){
 		return res.status(401).send({message : "Unauthorized"});
   	} else {
-    const repository = req.app.serviceLocator.userRepository;
+        const repository = req.app.serviceLocator.userRepository;
 
-    getAllUsers(repository)
-      	.then(users => res.status(200).json(serializer(users))) 
-      	.catch(err => {
-       		return res.status(500).send({ message: err.message });
-     	});      
+        getAllUsers(repository, req.query)
+      	    .then(users => res.status(200).json(serializer(users))) 
+      	    .catch(err => {
+       		    return res.status(500).send({ message: err.message });
+     	    });      
   	}
 };
 
-exports.get = (req, res) => {
+exports.getById = (req, res) => {
 	const apiKey = req.get("authorization");
     if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
         return res.status(401).send({message : "Unauthorized"});
     } else {
         const repository = req.app.serviceLocator.userRepository;
-        getUser(repository, req.params)
+        getUserById(repository, req.params)
         .then((user) => res.status(200).json(serializer(user)))
         .catch((err) => {
             if (err instanceof UserNotFound) {

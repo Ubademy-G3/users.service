@@ -7,7 +7,7 @@ module.exports = async (repository, userInfo) => {
         throw new BadRequest("Missing required fields");
     }
     
-    const userAlreadyExists = await repository.getByEmail(userInfo.email);
+    const userAlreadyExists = await repository.getUserByEmail(userInfo.email);
     if (userAlreadyExists) {
         throw new UserAlreadyExists("User already exists with given email");
     }

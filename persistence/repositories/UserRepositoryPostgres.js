@@ -30,7 +30,7 @@ module.exports = class extends UserRepository {
             newUser.subscriptionExpirationDate, newUser.favoriteCourses, newUser.coursesHistory);        
     }
 
-    static async getUser(id){
+    static async getUserById(id){
         const result = await UserDb.findAll({
             where: {
                id: id
@@ -58,7 +58,7 @@ module.exports = class extends UserRepository {
         return null;        
     }
 
-    static async getByEmail(email) {
+    static async getUserByEmail(email) {
         const result = await UserDb.findAll({
             where: {
                email: email
@@ -87,8 +87,12 @@ module.exports = class extends UserRepository {
         return null;
     }
 
-    static async  getAllUsers(){
-        return await UserDb.findAll();        
+    static async  getAllUsers(a){
+        return await UserDb.findAll({
+            where: a,
+            truncate: false
+          }
+        );        
     }
 
     static async removeUser(id){

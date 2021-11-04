@@ -7,7 +7,7 @@ module.exports = async (repository, params, userInfo) => {
         throw new BadRequest("Missing required fields");
     }
     
-    const userNotFound = await repository.getUser({email: params.id});
+    const userNotFound = await repository.getUserById(params.id);
     if (!userNotFound) {
         throw new UserNotFound("User not found with given email");
     }

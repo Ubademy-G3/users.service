@@ -3,7 +3,7 @@ module.exports = class Repository{
         throw new Error("Method Not implemented");
     }
 
-    static getUser(id){
+    static getUserById(id){
         throw new Error("Method Not implemented");
     }
 
@@ -23,7 +23,7 @@ module.exports = class Repository{
         throw new Error("Method Not implemented");
     }
 
-    static getByEmail(email){
+    static getUserByEmail(email){
         throw new Error("Method Not implemented");
     }
 

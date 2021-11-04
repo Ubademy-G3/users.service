@@ -6,7 +6,7 @@ module.exports = async (repository, params) => {
         throw new BadRequest("Missing required field");
     }
 
-    const user = await repository.getUser(params.id);
+    const user = await repository.getUserById(params.id);
     if (!user) {
         throw new UserNotFound("User Id not found");
     }
