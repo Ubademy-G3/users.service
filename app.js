@@ -1,10 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const users = require("./infrastructure/routes/Users");
 const db = require("./infrastructure/db/Database");
 require("dotenv").config();
-const cors = require("cors");
 
 const app = express();
 app.use(cors());
@@ -18,7 +18,7 @@ app.serviceLocator = require("./infrastructure/config/ServiceLocator");
 
 db.sequelize.sync({ force: true }).then(() => {
   app.listen(process.env.PORT, () => {
-    console.log(`App running on port ${process.env.PORT}`);
+    // console.log(`App running on port ${process.env.PORT}`);
   });
 });
 

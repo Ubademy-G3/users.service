@@ -1,7 +1,6 @@
 const UserModel = require("../../domain/UserModel");
 const db = require("../../infrastructure/db/Database");
 const UserRepository = require("../../domain/UserRepository");
-const User = require("../../domain/UserModel");
 
 const UserDb = db.users;
 // thats for operators like or, and, ecc. in conditionals like findAll where
@@ -24,15 +23,16 @@ module.exports = class extends UserRepository {
     };
 
     // combines the build and save methods
-    const newUser = await UserDb.create(user);
+    const newUser = UserDb.create(user);
 
-    return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName, newUser.rol,
-      newUser.location, newUser.interests, newUser.profilePictureUrl, newUser.subscription,
-      newUser.subscriptionExpirationDate, newUser.favoriteCourses, newUser.coursesHistory);
+    return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
+      newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
+      newUser.subscription, newUser.subscriptionExpirationDate, newUser.favoriteCourses,
+      newUser.coursesHistory);
   }
 
   static async getUserById(id) {
-    const result = await UserDb.findAll({
+    const result = UserDb.findAll({
       where: {
         id,
       },
@@ -60,7 +60,7 @@ module.exports = class extends UserRepository {
   }
 
   static async getUserByEmail(email) {
-    const result = await UserDb.findAll({
+    const result = UserDb.findAll({
       where: {
         email,
       },
@@ -88,14 +88,14 @@ module.exports = class extends UserRepository {
   }
 
   static async getAllUsers(a) {
-    return await UserDb.findAll({
+    return UserDb.findAll({
       where: a,
       truncate: false,
     });
   }
 
   static async removeUser(id) {
-    return await UserDb.destroy({
+    return UserDb.destroy({
       where: {
         id,
       },
@@ -103,14 +103,14 @@ module.exports = class extends UserRepository {
   }
 
   static async removeAllUsers() {
-    return await UserDb.destroy({
+    return UserDb.destroy({
       where: {},
       truncate: false,
     });
   }
 
   static async updateUser(userInfo) {
-    return await UserDb.update({
+    return UserDb.update({
       email: userInfo.email,
       firstName: userInfo.firstName,
       lastName: userInfo.lastName,
@@ -131,7 +131,7 @@ module.exports = class extends UserRepository {
   }
 
   static async patchUser(id, params) {
-    return await UserDb.update(params,
+    return UserDb.update(params,
       {
         where: {
           id,

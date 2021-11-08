@@ -1,10 +1,10 @@
-/*const sequelize = require("sequelize");
+/* const sequelize = require("sequelize");
 const request = require("supertest");
 const sequelizeMock = require("sequelize-mock");
 const app = require("../app");
 const model = require("../infrastructure/db/Sequelize"); // User Schema
 
-const dbMock = new sequelizeMock(model);*/
+const dbMock = new sequelizeMock(model); */
 
 const sum = require("./sum");
 
@@ -102,7 +102,7 @@ describe("POST /users", () => {
         .then((response) => {
         const res = JSON.parse(response.text);
         expect(res.email).toBe("john@doe.com");
-        expect(res.token).toBe("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE2MzU0ODEzMTMsImV4cCI6MTY2NzAxNzI2NCwiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSJ9.K6DshQk_f8HZy8N3HGY3dTfYeWQ-cyY9jkHoAwjRLbo");
+        expect(res.token).toBe("eyJ0eXAiHGY3dTfYeWQ-cyY9jkHoAwjRLbo");
         expect(res.password).toBeUndefined();
         expect(res.salt).toBeUndefined();
         expect(res.id).toBeUndefined();

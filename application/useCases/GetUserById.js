@@ -1,5 +1,6 @@
 const { BadRequest } = require("../../errors/BadRequest");
 const { UserNotFound } = require("../../errors/UserNotFound");
+const { UnexpectedError } = require("../../errors/UnexpectedError");
 
 module.exports = async (repository, params) => {
   if (!params.id) {

@@ -1,5 +1,3 @@
-const { restart } = require("nodemon");
-
 const createUser = require("../useCases/CreateNewUser");
 const getAllUsers = require("../useCases/GetAllUsers");
 const getUserById = require("../useCases/GetUserById");
@@ -14,7 +12,7 @@ const { UserNotFound } = require("../../errors/UserNotFound");
 
 const serializer = require("../serializers/UserSerializer");
 
-exports.create = async (req, res) => {
+exports.create = (req, res) => {
   const apiKey = req.get("authorization");
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
@@ -27,24 +25,25 @@ exports.create = async (req, res) => {
       if (err instanceof UserAlreadyExists) {
         return res.status(409).send({ message: err.message });
       }
-    	if (err instanceof BadRequest) {
-        	return res.status(400).send({ message: err.message });
-    	}
-      console.log(err);
+      if (err instanceof BadRequest) {
+        return res.status(400).send({ message: err.message });
+      }
       return res.status(500).send({ message: err.message });
-    	});
+    });
+  return 0;
 };
 
-exports.getAll = async (req, res) => {
+exports.getAll = (req, res) => {
   const apiKey = req.get("authorization");
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
-  	}
+  }
   const repository = req.app.serviceLocator.userRepository;
 
   getAllUsers(repository, req.query)
-      	    .then((users) => res.status(200).json(serializer(users)))
-      	    .catch((err) => res.status(500).send({ message: err.message }));
+    .then((users) => res.status(200).json(serializer(users)))
+    .catch((err) => res.status(500).send({ message: err.message }));
+  return 0;
 };
 
 exports.getById = (req, res) => {
@@ -61,6 +60,7 @@ exports.getById = (req, res) => {
       }
       return res.status(500).send({ message: err.message });
     });
+  return 0;
 };
 
 exports.update = (req, res) => {
@@ -81,6 +81,7 @@ exports.update = (req, res) => {
       }
       return res.status(500).send({ message: err.message });
     });
+  return 0;
 };
 
 exports.patch = (req, res) => {
@@ -101,6 +102,7 @@ exports.patch = (req, res) => {
       }
       return res.status(500).send({ message: err.message });
     });
+  return 0;
 };
 
 exports.delete = (req, res) => {
@@ -121,16 +123,18 @@ exports.delete = (req, res) => {
       }
       return res.status(500).send({ message: err.message });
     });
+  return 0;
 };
 
 exports.deleteAll = (req, res) => {
   const apiKey = req.get("authorization");
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
-  	}
+  }
   const repository = req.app.serviceLocator.userRepository;
 
   removeAllUsers(repository)
-      	.then((msg) => res.status(200).json(msg))
-      	.catch((err) => res.status(500).send({ message: err.message }));
+    .then((msg) => res.status(200).json(msg))
+    .catch((err) => res.status(500).send({ message: err.message }));
+  return 0;
 };

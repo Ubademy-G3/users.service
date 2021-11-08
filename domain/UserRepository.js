@@ -1,9 +1,9 @@
 module.exports = class Repository {
-  static createUser(body) {
+  static createUser() {
     throw new Error("Method Not implemented");
   }
 
-  static getUserById(id) {
+  static getUserById() {
     throw new Error("Method Not implemented");
   }
 
@@ -11,7 +11,7 @@ module.exports = class Repository {
     throw new Error("Method Not implemented");
   }
 
-  static removeUser(id) {
+  static removeUser() {
     throw new Error("Method Not implemented");
   }
 
@@ -19,15 +19,15 @@ module.exports = class Repository {
     throw new Error("Method Not implemented");
   }
 
-  static updateUser(user) {
+  static updateUser() {
     throw new Error("Method Not implemented");
   }
 
-  static getUserByEmail(email) {
+  static getUserByEmail() {
     throw new Error("Method Not implemented");
   }
 
-  static patchUser(id, body) {
+  static patchUser() {
     throw new Error("Method Not implemented");
   }
 };
