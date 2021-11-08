@@ -5,11 +5,18 @@ const request = require("supertest");
 const sequelizeMock = require("sequelize-mock");
 const dbMock = new sequelizeMock(model);
 
-let mockedUser;
+const sum = require('./sum');
+
+test('adds 1 + 2 to equal 3', () => {
+  const result = sum(1, 2);
+  expect(result).toBe(3);
+});
+
+/*let mockedUser;
 let mockedUser2;
 let mockedUserUpdated;
 
-/*beforeEach(() => {
+beforeEach(() => {
     mockedUser = {
         id: "3d0bc4e8-f301-47ce-930a-16b4bf0f2edf",
         email: "jonh@snow.com",
