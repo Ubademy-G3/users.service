@@ -8,23 +8,31 @@
 ├── src
 │   ├── infrastructure
 │   │   ├── db
-│   │   │   ├──  
-│   │   │   └──  
+│   │   │   ├── Database.js 
+│   │   │   └── Sequelize.js
 │   │   ├── routes
-│   │   │   └──  
+│   │   │   └── Users.js
+│   │   └── config
+│   │       └── ServiceLocator.js
 │   ├── persistence
 │   │   └── repositories
-│   │       └── 
+│   │       └── UserRepositoryPostgres.js
 │   ├── application
 │   │   ├── controllers
-│   │   │   └── 
+│   │   │   └── UserController.js
 │   │   ├──serializers
-│   │   │   └── 
+│   │   │   └── UserSerializer.js
 │   │   └── useCases
-│   │       └── 
+│   │       ├── CreateNewUser.js
+│   │       ├── GetAllUsers.js
+│   │       ├── GetUserById.js
+│   │       ├── PatchUser.js
+│   │       ├── RemoveAllUsers.js
+│   │       ├── RemoveUser.js
+│   │       └── UpdateUser.js
 │   └── domain
-│       ├── 
-│       └── 
+│       ├── UserModel.js
+│       └── UserRepository.js
 ├── monitoring
 ├── deploy
 └── tests

@@ -1,4 +1,4 @@
-//User Table Schema
+//User Schema
 
 module.exports = (database, Sequelize) => {
   const User = database.define("user", {
