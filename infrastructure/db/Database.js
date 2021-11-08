@@ -1,29 +1,26 @@
 const Sequelize = require("sequelize");
-const ENVIRONMENT = process.env.NODE_ENV;
 
 let database = null;
 
 if (process.env.NODE_ENV !== "stage") {
-  
-  database = new Sequelize(process.env.DATABASE_URL,{
-    dialect: 'postgres',
-		operatorsAliases: Sequelize.Op,
-		define: {timestamp: false}
-  })
-
+  database = new Sequelize(process.env.DATABASE_URL, {
+    dialect: "postgres",
+    operatorsAliases: Sequelize.Op,
+    define: { timestamp: false },
+  });
 } else {
-  database = new Sequelize(process.env.DATABASE_URL ,{
-		dialect: 'postgres',
-		operatorsAliases: Sequelize.Op,
+  database = new Sequelize(process.env.DATABASE_URL, {
+    dialect: "postgres",
+    operatorsAliases: Sequelize.Op,
 	  define: { timestamp: false },
-		ssl: true,
-		dialectOptions: {
-			ssl: {
+    ssl: true,
+    dialectOptions: {
+      ssl: {
       	require: true,
-      	rejectUnauthorized: false
-    	}
-		},
-  })
+      	rejectUnauthorized: false,
+    	},
+    },
+  });
 }
 
 const db = {};
@@ -33,5 +30,4 @@ db.sequelize = database;
 
 db.users = require("./Sequelize")(database, Sequelize);
 
-module.exports = db 
-
+module.exports = db;

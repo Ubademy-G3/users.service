@@ -1,18 +1,19 @@
-const sequelize = require("sequelize");
-const app = require("../app");
-const model = require("../infrastructure/db/Sequelize"); //User Schema
+/*const sequelize = require("sequelize");
 const request = require("supertest");
 const sequelizeMock = require("sequelize-mock");
-const dbMock = new sequelizeMock(model);
+const app = require("../app");
+const model = require("../infrastructure/db/Sequelize"); // User Schema
 
-const sum = require('./sum');
+const dbMock = new sequelizeMock(model);*/
 
-test('adds 1 + 2 to equal 3', () => {
+const sum = require("./sum");
+
+test("adds 1 + 2 to equal 3", () => {
   const result = sum(1, 2);
   expect(result).toBe(3);
 });
 
-/*let mockedUser;
+/* let mockedUser;
 let mockedUser2;
 let mockedUserUpdated;
 
@@ -150,4 +151,4 @@ describe("POST /users", () => {
         expect(res.message).toBe("Unauthorized");
         });
     });
-});*/
+}); */

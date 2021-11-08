@@ -1,4 +1,4 @@
-//User Schema
+// User Schema
 
 module.exports = (database, Sequelize) => {
   const User = database.define("user", {
@@ -6,41 +6,41 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: Sequelize.UUIDV4,
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     firstName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     lastName: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     rol: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     location: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     interests: {
-      type: Sequelize.ARRAY(Sequelize.STRING)
+      type: Sequelize.ARRAY(Sequelize.STRING),
     },
     profilePictureUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     subscription: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     subscriptionExpirationDate: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     favoriteCourses: {
-      type: Sequelize.ARRAY(Sequelize.INTEGER)
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
     },
     coursesHistory: {
-      type: Sequelize.ARRAY(Sequelize.INTEGER)
-    }
+      type: Sequelize.ARRAY(Sequelize.INTEGER),
+    },
   });
 
   return User;

@@ -26,4 +26,3 @@ router.delete("/:id", users.delete);
 router.delete("/", users.deleteAll);
 
 module.exports = router;
-
