@@ -1,41 +1,25 @@
 const express = require("express");
-const { Client } = require("pg");
+const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
+const users = require("./infrastructure/routes/Users");
+const db = require("./infrastructure/db/Database");
+require("dotenv").config();
 
 const app = express();
-
-const users = require("./infrastructure/routes/users");
-
-let client;
-if (process.env.NODE_ENV !== "stage") {
-  client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    query_timeout: 1000,
-    statement_timeout: 1000,
-    ssl: false,
-  });
-} else {
-  client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    query_timeout: 1000,
-    statement_timeout: 1000,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  });
-}
-
-client.connect();
+app.use(cors());
+app.use(express.json());
 
 app.use("/users", users);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get("/ping", (req, res) => res.send("Pong!"));
+app.serviceLocator = require("./infrastructure/config/ServiceLocator");
 
-app.get("/status", (req, res) => client.query("SELECT NOW()", (err) => res.send({ service: "UP", db: err ? "DOWN" : "UP" })));
-
-app.listen(process.env.PORT, () => {
-  // console.log(`App running on port ${process.env.PORT}`);
+db.sequelize.sync({ force: true }).then(() => {
+  app.listen(process.env.PORT, () => {
+    // console.log(`App running on port ${process.env.PORT}`);
+  });
 });
+
+module.exports = app;
