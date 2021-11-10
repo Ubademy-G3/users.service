@@ -1,3 +1,4 @@
+const { validate } = require("jsonschema");
 const createUser = require("../useCases/CreateNewUser");
 const getAllUsers = require("../useCases/GetAllUsers");
 const getUserById = require("../useCases/GetUserById");
@@ -5,6 +6,7 @@ const removeAllUsers = require("../useCases/RemoveAllUsers");
 const removeUser = require("../useCases/RemoveUser");
 const updateUser = require("../useCases/UpdateUser");
 const patchUser = require("../useCases/PatchUser");
+const USER_CREATION_SCHEMA = require("../../domain/UserSchema.json");
 
 const { BadRequest } = require("../../errors/BadRequest");
 const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
@@ -16,6 +18,10 @@ exports.create = (req, res) => {
   const apiKey = req.get("authorization");
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
+  }
+
+  if (!validate(req.body, USER_CREATION_SCHEMA).valid) {
+    return res.status(400).json({ message: "Invalid fields" });
   }
   const repository = req.app.serviceLocator.userRepository;
 
