@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "properties": {
+        "email": {"type": "string", "format": "email"},
+        "firstName": {"type": "string"},
+        "lastName": {"type": "string"},
+        "rol": {"type": "string"},
+        "location": {"type": "string"},
+        "interests": {"type": "array"},
+        "profilePictureUrl": {"type": "string"},
+        "subscription": {"type": "string"},
+        "subscriptionExpirationDate": {"type": "string"},
+        "favoriteCourses": {"type": "array"},
+        "coursesHistory": {"type": "array"}
+    },
+    "anyOf": [
+        {
+            "not": {
+                "properties": {
+                    "rol": { "const": "student" }
+                }
+            },
+            "required":  ["email", "firstName", "lastName", "rol"]
+        },
+        { "required":  ["email", "firstName", "lastName", "rol", "interests", "location"] }
+    ]
+}

@@ -30,6 +30,7 @@ services:
       - postgres
     networks:
       - my-network
+      - external-net
   
   pgadmin:
     container_name: pgadmin
@@ -48,6 +49,9 @@ services:
 networks:
   my-network:
     driver: bridge
+  external-net:
+    external: 
+      name: ubademy
 
 volumes:
   postgres_data:
