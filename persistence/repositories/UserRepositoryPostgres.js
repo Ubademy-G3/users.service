@@ -23,7 +23,7 @@ module.exports = class extends UserRepository {
     };
 
     // combines the build and save methods
-    const newUser = UserDb.create(user);
+    const newUser = await UserDb.create(user);
 
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
@@ -32,7 +32,7 @@ module.exports = class extends UserRepository {
   }
 
   static async getUserById(id) {
-    const result = UserDb.findAll({
+    const result = await UserDb.findAll({
       where: {
         id,
       },
@@ -60,7 +60,7 @@ module.exports = class extends UserRepository {
   }
 
   static async getUserByEmail(email) {
-    const result = UserDb.findAll({
+    const result = await UserDb.findAll({
       where: {
         email,
       },
@@ -88,31 +88,34 @@ module.exports = class extends UserRepository {
   }
 
   static async getAllUsers(a) {
-    return UserDb.findAll({
+    const users = await UserDb.findAll({
       where: a,
       truncate: false,
     });
+    return users;
   }
 
   static async removeUser(id) {
-    return UserDb.destroy({
+    const result = await UserDb.destroy({
       where: {
         id,
       },
     });
+    return result;
   }
 
   static async removeAllUsers() {
-    return UserDb.destroy({
+    const result = await UserDb.destroy({
       where: {},
       truncate: false,
     });
+    return result;
   }
 
   static async updateUser(userInfo) {
-    return UserDb.update({
+    const result = await UserDb.update({
       email: userInfo.email,
-      firstName: userInfo.firstName,
+      firstName: userInfo.firstserverName,
       lastName: userInfo.lastName,
       rol: userInfo.rol,
       location: userInfo.location,
@@ -128,14 +131,16 @@ module.exports = class extends UserRepository {
         id: userInfo.id,
       },
     });
+    return result;
   }
 
   static async patchUser(id, params) {
-    return UserDb.update(params,
+    const result = await UserDb.update(params,
       {
         where: {
           id,
         },
       });
+    return result;
   }
 };

@@ -16,7 +16,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.serviceLocator = require("./infrastructure/config/ServiceLocator");
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   app.listen(process.env.PORT, () => {
     // console.log(`App running on port ${process.env.PORT}`);
   });
