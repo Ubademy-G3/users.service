@@ -32,13 +32,7 @@ module.exports = class extends UserRepository {
   }
 
   static async getUserById(id) {
-    const result = UserDb.findAll({
-      where: {
-        id,
-      },
-    });
-
-    const user = result[0];
+    const user = await UserDb.findByPk(id);
 
     if (user && Object.keys(user).length !== 0) {
       return new UserModel(

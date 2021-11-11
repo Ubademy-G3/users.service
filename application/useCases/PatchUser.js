@@ -9,7 +9,7 @@ module.exports = async (repository, params, userInfo) => {
 
   const userNotFound = await repository.getUserById(params.id);
   if (!userNotFound) {
-    throw new UserNotFound("User not found with given email");
+    throw new UserNotFound("User ID not found");
   }
 
   try {
