@@ -36,10 +36,10 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING,
     },
     favoriteCourses: {
-      type: Sequelize.ARRAY(Sequelize.INTEGER),
+      type: Sequelize.ARRAY(Sequelize.UUID),
     },
     coursesHistory: {
-      type: Sequelize.ARRAY(Sequelize.INTEGER),
+      type: Sequelize.ARRAY(Sequelize.UUID),
     },
   });
 

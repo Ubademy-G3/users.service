@@ -78,13 +78,15 @@
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 },
                                 "coursesHistory": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
@@ -138,13 +140,15 @@
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 },
                                 "coursesHistory": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
@@ -235,13 +239,15 @@
                                     "favoriteCourses": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "integer",
+                                            "format":"uuid"
                                         }
                                     },
                                     "coursesHistory": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer"
+                                            "type": "integer",
+                                            "format":"uuid"
                                         }
                                     }
                                 }
@@ -425,13 +431,15 @@
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 },
                                 "coursesHistory": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
@@ -464,7 +472,8 @@
                                 "coursesHistory": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
@@ -541,13 +550,15 @@
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 },
                                 "coursesHistory": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
@@ -630,14 +641,16 @@
                                     "type": "array",
                                     "require": false,
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 },
                                 "coursesHistory": {
                                     "type": "array",
                                     "require": false,
                                     "items": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "format":"uuid"
                                     }
                                 }
                             }
