@@ -625,7 +625,34 @@
                         "required": true,
                         "schema": {
                             "properties": {
+                                "email": {
+                                    "type": "email",
+                                    "require": false
+                                },
+                                "firstName": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "lastName": {
+                                    "type": "string",
+                                    "require": false
+                                },
                                 "rol": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "location": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "interests": {
+                                    "type": "array",
+                                    "require": false,
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "profilePictureUrl": {
                                     "type": "string",
                                     "require": false
                                 },
