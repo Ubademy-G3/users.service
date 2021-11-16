@@ -20,7 +20,6 @@ exports.create = (req, res) => {
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }
-  console.log(req.body);
 
   if (!validate(req.body, USER_CREATION_SCHEMA).valid) {
     return res.status(400).json({ message: "Invalid fields" });
