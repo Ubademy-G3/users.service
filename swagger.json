@@ -73,21 +73,18 @@
                                     "type": "string"
                                 },
                                 "subscriptionExpirationDate": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "date-time"
                                 },
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     }
                                 },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
+                                "description": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -104,7 +101,7 @@
                             "type": "object",
                             "properties": {
                                 "id": {
-                                    "type": "integer",
+                                    "type": "string",
                                     "format":"uuid"
                                 },
                                 "email": {
@@ -135,21 +132,18 @@
                                     "type": "string"
                                 },
                                 "subscriptionExpirationDate": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "date-time"
                                 },
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     }
                                 },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
+                                "description": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -203,7 +197,7 @@
                             "items": {
                                 "properties": {
                                     "id": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     },
                                     "email": {
@@ -234,19 +228,21 @@
                                         "type": "string"
                                     },
                                     "subscriptionExpirationDate": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "format": "date-time"
+                                        
                                     },
                                     "favoriteCourses": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer",
+                                            "type": "string",
                                             "format":"uuid"
                                         }
                                     },
-                                    "coursesHistory": {
+                                    "description": {
                                         "type": "array",
                                         "items": {
-                                            "type": "integer",
+                                            "type": "string",
                                             "format":"uuid"
                                         }
                                     }
@@ -341,7 +337,7 @@
                             "type": "object",
                             "properties": {
                                 "id": {
-                                    "type": "integer",
+                                    "type": "string",
                                     "format":"uuid"
                                 },
                                 "email": {
@@ -372,109 +368,18 @@
                                     "type": "string"
                                 },
                                 "subscriptionExpirationDate": {
-                        "getByEmail": {
-                "tags": ["Users"],
-                "summary": "Get user by Email",
-                "description": "Returns a user based on a single Email",
-                "parameters": [
-                    {
-                        "name": "Email",
-                        "in": "path",
-                        "description": "Email of the user to fetch",
-                        "required": true
-                    },
-                    {
-                        "name": "authorization",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A user",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "integer",
-                                    "format":"uuid"
-                                },
-                                "email": {
-                                    "type": "string"
-                                },
-                                "firstName": {
-                                    "type": "string"
-                                },
-                                "lastName": {
-                                    "type": "string"
-                                },
-                                "rol": {
-                                    "type": "string"
-                                },
-                                "location": {
-                                    "type": "string"
-                                },
-                                "interests": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "profilePictureUrl": {
-                                    "type": "string"
-                                },
-                                "subscription": {
-                                    "type": "string"
-                                },
-                                "subscriptionExpirationDate": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "date-time"
                                 },
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     }
                                 },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },            "type": "array",
-                                    "items": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
+                                "description": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -518,7 +423,7 @@
                         "schema": {
                             "properties": {
                                 "email": {
-                                    "type": "email"
+                                    "type": "string"
                                 },
                                 "firstName": {
                                     "type": "string"
@@ -545,21 +450,18 @@
                                     "type": "string"
                                 },
                                 "subscriptionExpirationDate": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "date-time"
                                 },
                                 "favoriteCourses": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     }
                                 },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
+                                "description": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -626,7 +528,7 @@
                         "schema": {
                             "properties": {
                                 "email": {
-                                    "type": "email",
+                                    "type": "string",
                                     "require": false
                                 },
                                 "firstName": {
@@ -662,23 +564,20 @@
                                 },
                                 "subscriptionExpirationDate": {
                                     "type": "string",
-                                    "require": false
+                                    "require": false,
+                                    "format": "date-time"
                                 },
                                 "favoriteCourses": {
                                     "type": "array",
                                     "require": false,
                                     "items": {
-                                        "type": "integer",
+                                        "type": "string",
                                         "format":"uuid"
                                     }
                                 },
-                                "coursesHistory": {
-                                    "type": "array",
-                                    "require": false,
-                                    "items": {
-                                        "type": "integer",
-                                        "format":"uuid"
-                                    }
+                                "description": {
+                                    "type": "string",
+                                    "require": false
                                 }
                             }
                         }

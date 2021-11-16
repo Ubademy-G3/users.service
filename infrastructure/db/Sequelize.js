@@ -18,7 +18,9 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING,
     },
     rol: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM({
+        values: ['Student', 'Instructor']
+        })
     },
     location: {
       type: Sequelize.STRING,
@@ -30,16 +32,18 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.STRING,
     },
     subscription: {
-      type: Sequelize.STRING,
+      type: Sequelize.ENUM({
+        values: ['Free', 'Gold', 'Platinum']
+      })
     },
     subscriptionExpirationDate: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATE,
     },
     favoriteCourses: {
       type: Sequelize.ARRAY(Sequelize.UUID),
     },
-    coursesHistory: {
-      type: Sequelize.ARRAY(Sequelize.UUID),
+    description: {
+      type: Sequelize.STRING,
     },
   });
 

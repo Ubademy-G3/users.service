@@ -7,6 +7,7 @@ const removeUser = require("../useCases/RemoveUser");
 const updateUser = require("../useCases/UpdateUser");
 const patchUser = require("../useCases/PatchUser");
 const USER_CREATION_SCHEMA = require("../../domain/UserSchema.json");
+const USER_UPDATE_SCHEMA = require("../../domain/UpdateUserSchema.json");
 
 const { BadRequest } = require("../../errors/BadRequest");
 const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
@@ -19,6 +20,7 @@ exports.create = (req, res) => {
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }
+  console.log(req.body);
 
   if (!validate(req.body, USER_CREATION_SCHEMA).valid) {
     return res.status(400).json({ message: "Invalid fields" });
@@ -74,6 +76,11 @@ exports.update = (req, res) => {
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }
+
+  if (!validate(req.body, USER_UPDATE_SCHEMA).valid) {
+    return res.status(400).json({ message: "Invalid fields" });
+  }
+
   const repository = req.app.serviceLocator.userRepository;
 
   updateUser(repository, req.params, req.body)
@@ -95,6 +102,11 @@ exports.patch = (req, res) => {
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }
+
+  if (!validate(req.body, USER_UPDATE_SCHEMA).valid) {
+    return res.status(400).json({ message: "Invalid fields" });
+  }
+
   const repository = req.app.serviceLocator.userRepository;
 
   patchUser(repository, req.params, req.body)

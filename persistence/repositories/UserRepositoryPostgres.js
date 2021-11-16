@@ -19,7 +19,7 @@ module.exports = class extends UserRepository {
       subscription: userInfo.subscription,
       subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
       favoriteCourses: userInfo.favoriteCourses,
-      coursesHistory: userInfo.coursesHistory,
+      description: userInfo.description,
     };
 
     // combines the build and save methods
@@ -28,7 +28,7 @@ module.exports = class extends UserRepository {
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
       newUser.subscription, newUser.subscriptionExpirationDate, newUser.favoriteCourses,
-      newUser.coursesHistory);
+      newUser.description);
   }
 
   static async getUserById(id) {
@@ -47,7 +47,7 @@ module.exports = class extends UserRepository {
         user.subscription,
         user.subscriptionExpirationDate,
         user.favoriteCourses,
-        user.coursesHistory,
+        user.description,
       );
     }
     return null;
@@ -75,7 +75,7 @@ module.exports = class extends UserRepository {
         user.subscription,
         user.subscriptionExpirationDate,
         user.favoriteCourses,
-        user.coursesHistory,
+        user.description,
       );
     }
     return null;
@@ -118,7 +118,7 @@ module.exports = class extends UserRepository {
       subscription: userInfo.subscription,
       subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
       favoriteCourses: userInfo.favoriteCourses,
-      coursesHistory: userInfo.coursesHistory,
+      description: userInfo.description,
     },
     {
       where: {

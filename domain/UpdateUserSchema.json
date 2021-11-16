@@ -12,16 +12,5 @@
         "subscriptionExpirationDate": {"type": "string"},
         "favoriteCourses": {"type": "array"},
         "description": {"type": "string"}
-    },
-    "anyOf": [
-        {
-            "not": {
-                "properties": {
-                    "rol": { "const": "student" }
-                }
-            },
-            "required":  ["email", "firstName", "lastName", "rol"]
-        },
-        { "required":  ["email", "firstName", "lastName", "rol", "interests", "location"] }
-    ]
+    }
 }
