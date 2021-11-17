@@ -7,6 +7,14 @@ module.exports = async (repository, userInfo) => {
     throw new BadRequest("Missing required fields");
   }
 
+  if(userInfo.subscription !== "Free"){
+    const now = new Date();
+    const expiration = new Date(now.setMonth(now.getMonth()+1));
+    userInfo.subscriptionExpirationDate = expiration;
+  } else {
+    userInfo.subscriptionExpirationDate = null;
+  }
+
   const userAlreadyExists = await repository.getUserByEmail(userInfo.email);
   if (userAlreadyExists) {
     throw new UserAlreadyExists("User already exists with given email");

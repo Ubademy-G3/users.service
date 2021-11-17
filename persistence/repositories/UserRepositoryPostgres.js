@@ -7,7 +7,8 @@ const UserDb = db.users;
 // const Op = db.Sequelize.Op;
 
 module.exports = class extends UserRepository {
-  static async createUser(userInfo) {
+  static async createUser(userInfo) {    
+
     const user = {
       email: userInfo.email,
       firstName: userInfo.firstName,
@@ -107,6 +108,8 @@ module.exports = class extends UserRepository {
   }
 
   static async updateUser(userInfo) {
+        
+
     const result = await UserDb.update({
       email: userInfo.email,
       firstName: userInfo.firstserverName,

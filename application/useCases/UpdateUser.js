@@ -7,6 +7,12 @@ module.exports = async (repository, params, userInfo) => {
     throw new BadRequest("Missing required fields");
   }
 
+  if(userInfo.subscription !== "Free"){    
+    const now = new Date();
+    const expiration = new Date(now.setMonth(now.getMonth()+1));
+    userInfo.subscriptionExpirationDate = expiration;    
+  }
+
   const userNotFound = await repository.getUserById(params.id);
   if (!userNotFound) {
     throw new UserNotFound("User not found with given email");
