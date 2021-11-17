@@ -2,15 +2,16 @@ const { BadRequest } = require("../../errors/BadRequest");
 const { UnexpectedError } = require("../../errors/UnexpectedError");
 const { UserNotFound } = require("../../errors/UserNotFound");
 
-module.exports = async (repository, params, userInfo) => {
+module.exports = async (repository, params, userInfoBase) => {
+  const userInfo = userInfoBase;
   if (!params.id) {
     throw new BadRequest("Missing required fields");
   }
 
-  if(userInfo.subscription !== "Free"){    
+  if (userInfo.subscription !== "Free") {
     const now = new Date();
-    const expiration = new Date(now.setMonth(now.getMonth()+1));
-    userInfo.subscriptionExpirationDate = expiration;    
+    const expiration = new Date(now.setMonth(now.getMonth() + 1));
+    userInfo.subscriptionExpirationDate = expiration;
   }
 
   const userNotFound = await repository.getUserById(params.id);
