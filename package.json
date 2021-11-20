@@ -7,7 +7,7 @@
     "dev": "nodemon -L",
     "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
     "start": "node index.js",
-    "test": "NODE_ENV=testing jest && codecov",
+    "test": "NODE_ENV=testing USERSERVICE_APIKEY=47M47m jest && codecov",
     "test:coverage": "jest --verbose --coverage"
   },
   "repository": {

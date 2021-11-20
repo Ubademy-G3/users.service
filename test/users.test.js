@@ -3,8 +3,7 @@ const axios = require('axios');
 const AxiosMockAdapter = require('axios-mock-adapter');
 const app = require("../app");
 const userRepository = require("../persistence/repositories/UserRepositoryPostgres");
-const repository = new userRepository();
-console.log(repository);
+
 
 const users = [
   {
@@ -69,17 +68,17 @@ describe('userController', () => {
     });
   
     describe('/users', () => {
-      const path = '/';
+      const path = '/users';
   
       describe('GET', () => {
         describe('when there are users', () => {
           beforeEach(async () => {
             spyUserRepository.getAllUsers = jest
-              .spyOn(repository, 'getAllUsers')
+              .spyOn(userRepository, 'getAllUsers')
               .mockReturnValueOnce(users);
   
-            res = await request.get(path).set("Authorization", "test");
-          });
+            res = await request.get(path).set("authorization", "47M47m");
+        });
   
           it('should respond with correct status and body', () => {
             expect(res.status).toEqual(200);
