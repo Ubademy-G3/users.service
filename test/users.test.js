@@ -1,154 +1,93 @@
-/* const sequelize = require("sequelize");
-const request = require("supertest");
-const sequelizeMock = require("sequelize-mock");
+const supertest = require('supertest');
+const axios = require('axios');
+const AxiosMockAdapter = require('axios-mock-adapter');
 const app = require("../app");
-const model = require("../infrastructure/db/Sequelize"); // User Schema
+const userRepository = require("../persistence/repositories/UserRepositoryPostgres");
+const repository = new userRepository();
+console.log(repository);
 
-const dbMock = new sequelizeMock(model); */
+const users = [
+  {
+    "id": "0fe4170e-7f6e-41c8-8060-30c7e8795b0e",
+    "email": "dani@test.com",
+    "firstName": "Dani",
+    "lastName": "Test",
+    "rol": "Student",
+    "location": null,
+    "interests": null,
+    "profilePictureUrl": null,
+    "subscription": null,
+    "subscriptionExpirationDate": "2021-12-19T13:05:57.501Z",
+    "favoriteCourses": null,
+    "description": null
+  },
+  {
+    "id": "abc52922-eddf-403a-80b7-f61023953edd",
+    "email": "chia@gmail.com",
+    "firstName": "Chiara",
+    "lastName": "Bauni",
+    "rol": "Student",
+    "location": "Bs as",
+    "interests": null,
+    "profilePictureUrl": null,
+    "subscription": null,
+    "subscriptionExpirationDate": null,
+    "favoriteCourses": null,
+    "description": null
+  },
+  {
+    "id": "eb9b304a-9e50-4b6a-b47e-dabee64008c1",
+    "email": "chiara@gmail.com",
+    "firstName": "Chiara",
+    "lastName": "Bauni",
+    "rol": "Instructor",
+    "location": "Bs as",
+    "interests": null,
+    "profilePictureUrl": null,
+    "subscription": null,
+    "subscriptionExpirationDate": null,
+    "favoriteCourses": null,
+    "description": null
+  }
+]
 
-const sum = require("./sum");
-
-test("adds 1 + 2 to equal 3", () => {
-  const result = sum(1, 2);
-  expect(result).toBe(3);
-});
-
-/* let mockedUser;
-let mockedUser2;
-let mockedUserUpdated;
-
-beforeEach(() => {
-    mockedUser = {
-        id: "3d0bc4e8-f301-47ce-930a-16b4bf0f2edf",
-        email: "jonh@snow.com",
-        firstName: "Jhon",
-        lastName: "Snow",
-        rol: "student",
-        location: "argentina",
-        interests: [
-            "music"
-        ],
-        profilePictureUrl: "photosample.com",
-        subscription: "normal",
-        subscriptionExpirationDate: "01/01/3000",
-        favoriteCourses: [
-          1,2,3
-        ],
-        coursesHistory: [
-          2,3
-        ]
-    };
-
-    mockedUser2 = {
-        id: "8ba6be09-1039-454d-b7d9-2886fee96a11",
-        email: "eddard@stark.com",
-        firstName: "Eddard",
-        lastName: "Stark",
-        rol: "student",
-        location: "argentina",
-        interests: [
-            "falconry"
-        ],
-        profilePictureUrl: "photosample4.com",
-        subscription: "silver",
-        subscriptionExpirationDate: "01/01/3000",
-        favoriteCourses: [
-          1,4,3
-        ],
-        coursesHistory: [
-          2,6
-        ]
-    };
-
-    mockedUserUpdated = {
-        id: "3d0bc4e8-f301-47ce-930a-16b4bf0f2edf",
-        email: "jonh@snow.com",
-        firstName: "Jhon",
-        lastName: "Snow",
-        rol: "collaborator",
-        location: "argentina",
-        interests: [
-            "science"
-        ],
-        profilePictureUrl: "photosample2.com",
-        subscription: "gold",
-        subscriptionExpirationDate: "02/02/3000",
-        favoriteCourses: [
-          1,2,3
-        ],
-        coursesHistory: [
-          2,3,4,5
-        ]
-    };
-});
-
-afterEach(() => {
-    jest.clearAllMocks();
-});
-
-describe("POST /users", () => {
+describe('userController', () => {
+    let request;
+    let res;
+    let spyUserRepository;    
+    
     beforeEach(() => {
-    mockingoose(model).reset();
-    process.env.AUTH_APIKEY = "test";
+      spyUserRepository = {};
+      request = supertest(app);
+  
+      // API Keys
+      fakeApikey = 'fake-apikey';
     });
+  
     afterEach(() => {
-    delete process.env.AUTH_APIKEY;
+      jest.clearAllMocks();
     });
-    test("Creates user successfully with valid email and password", async () => {
-    await supertest(app).post("/users/")
-        .set("Authorization", "test")
-        .send(mockedUser)
-        .expect(200)
-        .then((response) => {
-        const res = JSON.parse(response.text);
-        expect(res.email).toBe("john@doe.com");
-        expect(res.token).toBe("eyJ0eXAiHGY3dTfYeWQ-cyY9jkHoAwjRLbo");
-        expect(res.password).toBeUndefined();
-        expect(res.salt).toBeUndefined();
-        expect(res.id).toBeUndefined();
+  
+    describe('/users', () => {
+      const path = '/';
+  
+      describe('GET', () => {
+        describe('when there are users', () => {
+          beforeEach(async () => {
+            spyUserRepository.getAllUsers = jest
+              .spyOn(repository, 'getAllUsers')
+              .mockReturnValueOnce(users);
+  
+            res = await request.get(path).set("Authorization", "test");
+          });
+  
+          it('should respond with correct status and body', () => {
+            expect(res.status).toEqual(200);
+            expect(res.header['content-type']).toMatch(/json/);
+            expect(res.body).toEqual(users);
+          });
         });
-    });
-    test("Fails when password is missing", async () => {
-    await supertest(app).post("/users/")
-        .set("Authorization", "test")
-        .send({ email: mockedUser.email })
-        .expect(400)
-        .then((response) => {
-        const res = JSON.parse(response.text);
-        expect(res.message).toBe("Missing required fields");
-        });
-    });
-    test("Fails when email is missing", async () => {
-    await supertest(app).post("/users/")
-        .set("Authorization", "test")
-        .send({ password: mockedUser.password })
-        .expect(400)
-        .then((response) => {
-        const res = JSON.parse(response.text);
-        expect(res.message).toBe("Missing required fields");
-        });
-    });
-    test("Fails email already exists", async () => {
-    const existingUser = mockedUser;
-    mockingoose(model).toReturn(existingUser, "findOne");
-    await supertest(app).post("/users/")
-        .set("Authorization", "test")
-        .send(mockedUser)
-        .expect(409)
-        .then((response) => {
-        const res = JSON.parse(response.text);
-        expect(res.message).toBe("User already exists with given email");
-        });
-    });
-    test("Returns unauthorized when invalid apikey", async () => {
-    const existingUser = mockedUser;
-    mockingoose(model).toReturn(existingUser, "findOne");
-    await supertest(app).post("/users/")
-        .set("Authorization", "invalid")
-        .expect(401)
-        .then((response) => {
-        const res = JSON.parse(response.text);
-        expect(res.message).toBe("Unauthorized");
-        });
-    });
-}); */
+      })
+    })
+})
+

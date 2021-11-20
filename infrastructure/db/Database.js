@@ -1,3 +1,4 @@
+if(process.env.NODE_ENV !== "testing"){
 const Sequelize = require("sequelize");
 
 let database = null;
@@ -31,3 +32,4 @@ db.sequelize = database;
 db.users = require("./Sequelize")(database, Sequelize);
 
 module.exports = db;
+}
