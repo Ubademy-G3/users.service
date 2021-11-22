@@ -19,7 +19,7 @@ module.exports = (database, Sequelize) => {
     },
     rol: {
       type: Sequelize.ENUM({
-        values: ["Student", "Instructor"],
+        values: ["student", "instructor", "admin"],
       }),
     },
     location: {
@@ -33,8 +33,9 @@ module.exports = (database, Sequelize) => {
     },
     subscription: {
       type: Sequelize.ENUM({
-        values: ["Free", "Gold", "Platinum"],
+        values: ["free", "gold", "platinum"],
       }),
+      defaultValue: "free"
     },
     subscriptionExpirationDate: {
       type: Sequelize.DATE,

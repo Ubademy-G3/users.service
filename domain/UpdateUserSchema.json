@@ -4,11 +4,11 @@
         "email": {"type": "string", "format": "email"},
         "firstName": {"type": "string"},
         "lastName": {"type": "string"},
-        "rol": {"type": "string", "enum": ["Student","Instructor"]},
+        "rol": {"type": "string", "enum": ["student", "instructor", "admin"]},
         "location": {"type": "string"},
         "interests": {"type": "array"},
         "profilePictureUrl": {"type": "string"},
-        "subscription": {"type": "string", "enum": ["Free","Gold", "Platinum"]},
+        "subscription": {"type": "string", "enum": ["free", "gold", "platinum"]},
         "subscriptionExpirationDate": {"type": "string"},
         "favoriteCourses": {"type": "array"},
         "description": {"type": "string"}
