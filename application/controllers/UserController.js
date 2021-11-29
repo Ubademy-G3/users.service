@@ -35,6 +35,7 @@ exports.create = (req, res) => {
       if (err instanceof BadRequest) {
         return res.status(400).send({ message: err.message });
       }
+      console.log(err)
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -42,7 +43,6 @@ exports.create = (req, res) => {
 
 exports.getAll = (req, res) => {
   const apiKey = req.get("authorization");
-  console.log(apiKey);
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }

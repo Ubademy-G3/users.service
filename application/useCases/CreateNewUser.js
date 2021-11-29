@@ -4,9 +4,6 @@ const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
 
 module.exports = async (repository, userInfoBase) => {
   const userInfo = userInfoBase;
-  if (!userInfo.email || !userInfo.firstName || !userInfo.lastName) {
-    throw new BadRequest("Missing required fields");
-  }
 
   if (userInfo.subscription !== "Free") {
     const now = new Date();

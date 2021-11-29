@@ -8,7 +8,7 @@
     "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
     "start": "node index.js",
     "test": "NODE_ENV=testing USERSERVICE_APIKEY=47M47m jest && codecov",
-    "test:coverage": "jest --verbose --coverage"
+    "test:coverage": "NODE_ENV=testing USERSERVICE_APIKEY=47M47m jest --verbose --coverage"
   },
   "repository": {
     "type": "git",
