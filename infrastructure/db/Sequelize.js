@@ -35,7 +35,7 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.ENUM({
         values: ["free", "gold", "platinum"],
       }),
-      defaultValue: "free"
+      defaultValue: "free",
     },
     subscriptionExpirationDate: {
       type: Sequelize.DATE,

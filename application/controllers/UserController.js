@@ -9,7 +9,6 @@ const patchUser = require("../useCases/PatchUser");
 const USER_CREATION_SCHEMA = require("../../domain/UserSchema.json");
 const USER_UPDATE_SCHEMA = require("../../domain/UpdateUserSchema.json");
 
-const { BadRequest } = require("../../errors/BadRequest");
 const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
 const { UserNotFound } = require("../../errors/UserNotFound");
 
@@ -31,9 +30,6 @@ exports.create = (req, res) => {
     .catch((err) => {
       if (err instanceof UserAlreadyExists) {
         return res.status(409).send({ message: err.message });
-      }
-      if (err instanceof BadRequest) {
-        return res.status(400).send({ message: err.message });
       }
       return res.status(500).send({ message: err.message });
     });
@@ -88,9 +84,6 @@ exports.update = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      if (err instanceof BadRequest) {
-        return res.status(400).send({ message: err.message });
-      }
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -114,9 +107,6 @@ exports.patch = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      if (err instanceof BadRequest) {
-        return res.status(400).send({ message: err.message });
-      }
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -134,9 +124,6 @@ exports.delete = (req, res) => {
     .catch((err) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
-      }
-      if (err instanceof BadRequest) {
-        return res.status(400).send({ message: err.message });
       }
       return res.status(500).send({ message: err.message });
     });
