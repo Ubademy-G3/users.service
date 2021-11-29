@@ -1,4 +1,3 @@
-const { BadRequest } = require("../../errors/BadRequest");
 const { UnexpectedError } = require("../../errors/UnexpectedError");
 const { UserAlreadyExists } = require("../../errors/UserAlreadyExists");
 
