@@ -111,6 +111,19 @@ describe("userController", () => {
         });
       });
 
+      describe("when unexpected error happens gettin user by id", () => {
+        it("should respond with unexpected error status", async () => {
+          spyUserRepository.getUserById = jest
+            .spyOn(userRepository, "getUserById")
+            .mockImplementation(() => {
+              throw new Error();
+            });
+
+          res = await request.get(`${path}/1234`).set("authorization", "47M47m");
+          expect(res.status).toEqual(500);
+        });
+      });
+
       describe("when invalid apikey", () => {
         beforeEach(async () => {
           spyUserRepository.getAllUsers = jest
@@ -261,6 +274,14 @@ describe("userController", () => {
         });
       });
 
+      describe("when invalid user", () => {
+        it("should respond with bad request status and body", async () => {
+          res = await request.put(`${path}/1234`).send(users[0]).set("authorization", "47M47m");
+          expect(res.status).toEqual(400);
+          expect(res.body).toEqual({ message: "Invalid fields" });
+        });
+      });
+
       describe("when user exists", () => {
         it("should respond with correct status and body", async () => {
           spyUserRepository.getUserById = jest
@@ -357,6 +378,14 @@ describe("userController", () => {
           expect(res.status).toEqual(200);
           expect(res.header["content-type"]).toMatch(/json/);
           expect(res.body).toEqual({ message: "User updated successfully" });
+        });
+      });
+
+      describe("when invalid user", () => {
+        it("should respond with bad request status and body", async () => {
+          res = await request.patch(`${path}/1234`).send(users[0]).set("authorization", "47M47m");
+          expect(res.status).toEqual(400);
+          expect(res.body).toEqual({ message: "Invalid fields" });
         });
       });
 
@@ -463,6 +492,18 @@ describe("userController", () => {
         });
       });
 
+      describe("when invalid apikey deleting all", () => {
+        it("should respond with unauthorized error status and body", async () => {
+          spyUserRepository.removeAllUsers = jest
+            .spyOn(userRepository, "removeAllUsers")
+            .mockReturnValueOnce(users[0]);
+
+          res = await request.delete(`${path}`).set("authorization", "banana");
+          expect(res.status).toEqual(401);
+          expect(res.body).toEqual({ message: "Unauthorized" });
+        });
+      });
+
       describe("when unexpected error happens", () => {
         it("should respond with unexpected error status", async () => {
           spyUserRepository.removeUser = jest
@@ -472,6 +513,19 @@ describe("userController", () => {
             });
 
           res = await request.delete(`${path}/1234`).send(newUser).set("authorization", "47M47m");
+          expect(res.status).toEqual(500);
+        });
+      });
+
+      describe("when unexpected error happens", () => {
+        it("should respond with unexpected error status deleting all", async () => {
+          spyUserRepository.removeAllUsers = jest
+            .spyOn(userRepository, "removeAllUsers")
+            .mockImplementation(() => {
+              throw new Error();
+            });
+
+          res = await request.delete(`${path}`).send(newUser).set("authorization", "47M47m");
           expect(res.status).toEqual(500);
         });
       });
