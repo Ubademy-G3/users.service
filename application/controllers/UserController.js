@@ -38,6 +38,7 @@ exports.create = (req, res) => {
 
 exports.getAll = (req, res) => {
   const apiKey = req.get("authorization");
+  console.log(apiKey);
   if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
     return res.status(401).send({ message: "Unauthorized" });
   }

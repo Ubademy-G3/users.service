@@ -46,6 +46,16 @@ module.exports = (database, Sequelize) => {
     description: {
       type: Sequelize.STRING,
     },
+    registerType: {
+      type: Sequelize.ENUM({
+        values: ["google", "not-google"],
+      }),
+    },
+    loginType: {
+      type: Sequelize.ENUM({
+        values: ["google", "not-google"],
+      }),
+    }
   });
 
   return User;

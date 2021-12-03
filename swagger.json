@@ -85,6 +85,12 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerTpye": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -143,6 +149,12 @@
                                     }
                                 },
                                 "description": {
+                                    "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
                                     "type": "string"
                                 }
                             }
@@ -245,6 +257,12 @@
                                             "type": "string",
                                             "format":"uuid"
                                         }
+                                    },
+                                    "registerType": {
+                                        "type": "string"
+                                    },
+                                    "loginType": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -380,6 +398,12 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -461,6 +485,12 @@
                                     }
                                 },
                                 "description": {
+                                    "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
                                     "type": "string"
                                 }
                             }
@@ -576,6 +606,14 @@
                                     }
                                 },
                                 "description": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "registerType": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "loginType": {
                                     "type": "string",
                                     "require": false
                                 }

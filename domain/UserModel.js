@@ -1,7 +1,8 @@
 module.exports = class User {
   constructor(UUID, email, firstName, lastName, rol,
     location, interests, profilePictureUrl, subscription,
-    subscriptionExpirationDate, favoriteCourses, description) {
+    subscriptionExpirationDate, favoriteCourses, description,
+    registerType, loginType) {
     this.id = UUID;
     this.email = email;
     this.firstName = firstName;
@@ -14,5 +15,7 @@ module.exports = class User {
     this.subscriptionExpirationDate = subscriptionExpirationDate;
     this.favoriteCourses = favoriteCourses;
     this.description = description;
+    this.registerType = registerType;
+    this.loginType = loginType;
   }
 };
