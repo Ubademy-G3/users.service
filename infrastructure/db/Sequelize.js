@@ -55,6 +55,9 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.ENUM({
         values: ["google", "not-google"],
       }),
+    },
+    passwordChanged: {
+      type: Sequelize.INTEGER,
     }
   });
 

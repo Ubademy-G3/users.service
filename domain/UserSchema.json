@@ -13,7 +13,8 @@
         "favoriteCourses": {"type": "array"},
         "description": {"type": "string"},
         "registerType": {"type": "string", "enum": ["google", "not-google"]},
-        "loginType": {"type": "string", "enum": ["google", "not-google"]}
+        "loginType": {"type": "string", "enum": ["google", "not-google"]},
+        "passwordChanged": {"type": "number"}
     },
     "anyOf": [
         {

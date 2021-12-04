@@ -12,7 +12,8 @@ const serializeUser = (user) => ({
   favoriteCourses: user.favoriteCourses,
   description: user.description,
   registerType: user.registerType,
-  loginType: user.loginType
+  loginType: user.loginType,
+  passwordChanged: user.passwordChanged
 });
 
 module.exports = (data) => {

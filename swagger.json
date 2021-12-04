@@ -86,11 +86,14 @@
                                 "description": {
                                     "type": "string"
                                 },
-                                "registerTpye": {
+                                "registerType": {
                                     "type": "string"
                                 },
                                 "loginType": {
                                     "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -156,6 +159,9 @@
                                 },
                                 "loginType": {
                                     "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -263,6 +269,9 @@
                                     },
                                     "loginType": {
                                         "type": "string"
+                                    },
+                                    "passwordChanged": {
+                                        "type": "number"
                                     }
                                 }
                             }
@@ -404,6 +413,9 @@
                                 },
                                 "loginType": {
                                     "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -492,6 +504,9 @@
                                 },
                                 "loginType": {
                                     "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -615,6 +630,10 @@
                                 },
                                 "loginType": {
                                     "type": "string",
+                                    "require": false
+                                },
+                                "passwordChanged": {
+                                    "type": "number",
                                     "require": false
                                 }
                             }
