@@ -58,7 +58,7 @@ module.exports = (database, Sequelize) => {
     },
     passwordChanged: {
       type: Sequelize.INTEGER,
-    }
+    },
   });
 
   return User;

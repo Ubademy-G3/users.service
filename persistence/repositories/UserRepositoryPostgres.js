@@ -52,7 +52,7 @@ module.exports = class extends UserRepository {
         user.description,
         user.registerType,
         user.loginType,
-        user.passwordChanged
+        user.passwordChanged,
       );
     }
     return null;
@@ -83,7 +83,7 @@ module.exports = class extends UserRepository {
         user.description,
         user.registerType,
         user.loginType,
-        user.passwordChanged
+        user.passwordChanged,
       );
     }
     return null;
@@ -129,7 +129,7 @@ module.exports = class extends UserRepository {
       description: userInfo.description,
       registerType: userInfo.registerType,
       loginType: userInfo.loginType,
-      passwordChanged: userInfo.passwordChanged
+      passwordChanged: userInfo.passwordChanged,
     },
     {
       where: {
@@ -140,10 +140,10 @@ module.exports = class extends UserRepository {
   }
 
   static async patchUser(id, params) {
-    if(params.hasOwnProperty('passwordChanged')){
-      if(params.passwordChanged === 1){
+    if ({}.propertyIsEnumerable.call(params, "passwordChanged")) {
+      if (params.passwordChanged === 1) {
         const userWithId = await this.getUserById(id);
-        params['passwordChanged'] = userWithId.passwordChanged + 1;
+        params.passwordChanged = userWithId.passwordChanged + 1;
       }
     }
     const result = await UserDb.update(params,

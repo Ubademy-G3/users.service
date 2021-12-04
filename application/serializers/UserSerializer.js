@@ -13,7 +13,7 @@ const serializeUser = (user) => ({
   description: user.description,
   registerType: user.registerType,
   loginType: user.loginType,
-  passwordChanged: user.passwordChanged
+  passwordChanged: user.passwordChanged,
 });
 
 module.exports = (data) => {
