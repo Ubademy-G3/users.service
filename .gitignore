@@ -27,4 +27,6 @@ coverage/
 .env.test
 
 
+heroku-entrypoint.sh
+deploy/heroku-entrypoint.sh
 
