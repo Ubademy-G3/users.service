@@ -85,6 +85,15 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -144,6 +153,15 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -245,6 +263,15 @@
                                             "type": "string",
                                             "format":"uuid"
                                         }
+                                    },
+                                    "registerType": {
+                                        "type": "string"
+                                    },
+                                    "loginType": {
+                                        "type": "string"
+                                    },
+                                    "passwordChanged": {
+                                        "type": "number"
                                     }
                                 }
                             }
@@ -380,6 +407,15 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -462,6 +498,15 @@
                                 },
                                 "description": {
                                     "type": "string"
+                                },
+                                "registerType": {
+                                    "type": "string"
+                                },
+                                "loginType": {
+                                    "type": "string"
+                                },
+                                "passwordChanged": {
+                                    "type": "number"
                                 }
                             }
                         }
@@ -577,6 +622,18 @@
                                 },
                                 "description": {
                                     "type": "string",
+                                    "require": false
+                                },
+                                "registerType": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "loginType": {
+                                    "type": "string",
+                                    "require": false
+                                },
+                                "passwordChanged": {
+                                    "type": "number",
                                     "require": false
                                 }
                             }

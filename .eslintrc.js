@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     semi: ["error", "always"],
     quotes: ["error", "double"],
+    "no-param-reassign": [2, { props: false }],
   },
 };

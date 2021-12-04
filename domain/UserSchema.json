@@ -11,7 +11,10 @@
         "subscription": {"type": "string", "enum": ["free","gold", "platinum"]},
         "subscriptionExpirationDate": {"type": "string"},
         "favoriteCourses": {"type": "array"},
-        "description": {"type": "string"}
+        "description": {"type": "string"},
+        "registerType": {"type": "string", "enum": ["google", "not-google"]},
+        "loginType": {"type": "string", "enum": ["google", "not-google"]},
+        "passwordChanged": {"type": "number"}
     },
     "anyOf": [
         {

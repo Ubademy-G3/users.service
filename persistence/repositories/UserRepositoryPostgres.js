@@ -20,6 +20,8 @@ module.exports = class extends UserRepository {
       subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
       favoriteCourses: userInfo.favoriteCourses,
       description: userInfo.description,
+      registerType: userInfo.registerType,
+      loginType: userInfo.loginType,
     };
 
     // combines the build and save methods
@@ -28,7 +30,7 @@ module.exports = class extends UserRepository {
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
       newUser.subscription, newUser.subscriptionExpirationDate, newUser.favoriteCourses,
-      newUser.description);
+      newUser.description, newUser.registerType, newUser.loginType);
   }
 
   static async getUserById(id) {
@@ -48,6 +50,9 @@ module.exports = class extends UserRepository {
         user.subscriptionExpirationDate,
         user.favoriteCourses,
         user.description,
+        user.registerType,
+        user.loginType,
+        user.passwordChanged,
       );
     }
     return null;
@@ -76,6 +81,9 @@ module.exports = class extends UserRepository {
         user.subscriptionExpirationDate,
         user.favoriteCourses,
         user.description,
+        user.registerType,
+        user.loginType,
+        user.passwordChanged,
       );
     }
     return null;
@@ -119,6 +127,9 @@ module.exports = class extends UserRepository {
       subscriptionExpirationDate: userInfo.subscriptionExpirationDate,
       favoriteCourses: userInfo.favoriteCourses,
       description: userInfo.description,
+      registerType: userInfo.registerType,
+      loginType: userInfo.loginType,
+      passwordChanged: userInfo.passwordChanged,
     },
     {
       where: {
@@ -129,6 +140,12 @@ module.exports = class extends UserRepository {
   }
 
   static async patchUser(id, params) {
+    if ({}.propertyIsEnumerable.call(params, "passwordChanged")) {
+      if (params.passwordChanged === 1) {
+        const userWithId = await this.getUserById(id);
+        params.passwordChanged = userWithId.passwordChanged + 1;
+      }
+    }
     const result = await UserDb.update(params,
       {
         where: {
