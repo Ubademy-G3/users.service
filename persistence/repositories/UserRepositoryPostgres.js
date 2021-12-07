@@ -22,6 +22,7 @@ module.exports = class extends UserRepository {
       description: userInfo.description,
       registerType: userInfo.registerType,
       loginType: userInfo.loginType,
+      passwordChanged: 0,
     };
 
     // combines the build and save methods
