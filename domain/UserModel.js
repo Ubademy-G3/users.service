@@ -2,7 +2,7 @@ module.exports = class User {
   constructor(UUID, email, firstName, lastName, rol,
     location, interests, profilePictureUrl, subscription,
     subscriptionExpirationDate, favoriteCourses, description,
-    registerType, loginType, passwordChanged) {
+    registerType, loginType, passwordChanged, walletId) {
     this.id = UUID;
     this.email = email;
     this.firstName = firstName;
@@ -18,5 +18,6 @@ module.exports = class User {
     this.registerType = registerType;
     this.loginType = loginType;
     this.passwordChanged = passwordChanged;
+    this.walletId = walletId;
   }
 };

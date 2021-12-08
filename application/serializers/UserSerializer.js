@@ -14,6 +14,7 @@ const serializeUser = (user) => ({
   registerType: user.registerType,
   loginType: user.loginType,
   passwordChanged: user.passwordChanged,
+  walletId: user.walletId,
 });
 
 module.exports = (data) => {

@@ -94,6 +94,9 @@
                                 },
                                 "passwordChanged": {
                                     "type": "number"
+                                },
+                                "walletId": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -162,6 +165,9 @@
                                 },
                                 "passwordChanged": {
                                     "type": "number"
+                                },
+                                "walletId": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -272,6 +278,9 @@
                                     },
                                     "passwordChanged": {
                                         "type": "number"
+                                    },
+                                    "walletId": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -416,6 +425,9 @@
                                 },
                                 "passwordChanged": {
                                     "type": "number"
+                                },
+                                "walletId": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -507,6 +519,9 @@
                                 },
                                 "passwordChanged": {
                                     "type": "number"
+                                },
+                                "walletId": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -635,6 +650,9 @@
                                 "passwordChanged": {
                                     "type": "number",
                                     "require": false
+                                },
+                                "walletId": {
+                                    "type": "string"
                                 }
                             }
                         }
