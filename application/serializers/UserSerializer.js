@@ -14,13 +14,14 @@ const serializeUser = (user) => ({
   registerType: user.registerType,
   loginType: user.loginType,
   passwordChanged: user.passwordChanged,
+  walletId: user.walletId
 });
 
 module.exports = (data) => {
   if (!data) {
     throw new Error("Expect data to be not undefined nor null");
   }
-
+  console.log(data);
   if (Array.isArray(data)) {
     return data.map(serializeUser);
   }

@@ -59,6 +59,9 @@ module.exports = (database, Sequelize) => {
     passwordChanged: {
       type: Sequelize.INTEGER,
     },
+    wallet_id: {
+      type: Sequelize.UUID,
+    }
   });
 
   return User;
