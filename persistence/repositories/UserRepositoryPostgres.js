@@ -23,7 +23,7 @@ module.exports = class extends UserRepository {
       registerType: userInfo.registerType,
       loginType: userInfo.loginType,
       passwordChanged: 0,
-      wallet_id: userInfo.walletId
+      wallet_id: userInfo.walletId,
     };
 
     // combines the build and save methods
@@ -32,7 +32,8 @@ module.exports = class extends UserRepository {
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
       newUser.subscription, newUser.subscriptionExpirationDate, newUser.favoriteCourses,
-      newUser.description, newUser.registerType, newUser.loginType, newUser.passwordChanged, newUser.wallet_id);
+      newUser.description, newUser.registerType, newUser.loginType, newUser.passwordChanged,
+      newUser.wallet_id);
   }
 
   static async getUserById(id) {
@@ -55,7 +56,7 @@ module.exports = class extends UserRepository {
         user.registerType,
         user.loginType,
         user.passwordChanged,
-        user.wallet_id
+        user.wallet_id,
       );
     }
     return null;
@@ -87,7 +88,7 @@ module.exports = class extends UserRepository {
         user.registerType,
         user.loginType,
         user.passwordChanged,
-        user.wallet_id
+        user.wallet_id,
       );
     }
     return null;
@@ -134,7 +135,7 @@ module.exports = class extends UserRepository {
       registerType: userInfo.registerType,
       loginType: userInfo.loginType,
       passwordChanged: userInfo.passwordChanged,
-      wallet_id: userInfo.walletId
+      wallet_id: userInfo.walletId,
     },
     {
       where: {

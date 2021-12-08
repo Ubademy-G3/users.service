@@ -61,7 +61,7 @@ module.exports = (database, Sequelize) => {
     },
     wallet_id: {
       type: Sequelize.UUID,
-    }
+    },
   });
 
   return User;

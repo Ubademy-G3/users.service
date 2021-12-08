@@ -19,6 +19,5 @@ module.exports = class User {
     this.loginType = loginType;
     this.passwordChanged = passwordChanged;
     this.walletId = walletId;
-    console.log(walletId);
   }
 };
