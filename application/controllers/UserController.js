@@ -36,7 +36,7 @@ exports.create = (req, res) => {
         logger.warn("User already exists");
         return res.status(409).send({ message: err.message });
       }
-      logger.error("Critical error while creating user: "+ err.message);
+      logger.error(`Critical error while creating user: ${err.message}`);
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -71,7 +71,7 @@ exports.getById = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      logger.error("Critical error while getting user by id: " + err.message);
+      logger.error(`Critical error while getting user by id: ${err.message}`);
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -98,7 +98,7 @@ exports.update = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      logger.error("Critical error while updating user: "+ err.message);
+      logger.error(`Critical error while updating user: ${err.message}`);
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -125,7 +125,7 @@ exports.patch = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      logger.error("Critical error while patching user: "+ err.message);
+      logger.error(`Critical error while patching user: ${err.message}`);
       return res.status(500).send({ message: err.message });
     });
   return 0;
@@ -146,7 +146,7 @@ exports.delete = (req, res) => {
       if (err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message });
       }
-      logger.error("Critical error while deleting user: "+ err.message);
+      logger.error(`Critical error while deleting user: ${err.message}`);
       return res.status(500).send({ message: err.message });
     });
   return 0;

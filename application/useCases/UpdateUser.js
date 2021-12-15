@@ -13,7 +13,7 @@ module.exports = async (repository, params, userInfoBase) => {
 
   const userNotFound = await repository.getUserById(params.id);
   if (!userNotFound) {
-    logger.warn("User "+userInfo.id+" not found");
+    logger.warn(`User ${userInfo.id} not found`);
     throw new UserNotFound("User not found with given id");
   }
   const user = userInfo;
@@ -24,10 +24,10 @@ module.exports = async (repository, params, userInfoBase) => {
       logger.info("User updated successfully");
       return { message: "User updated successfully" };
     }
-    logger.error("Critical error while updating user "+user.id);
+    logger.error(`Critical error while updating user ${user.id}`);
     throw new UnexpectedError("Unexpected error happened when updating user");
   } catch (err) {
-    logger.error("Critical error while updating user "+user.id+". ", err);
+    logger.error(`Critical error while updating user ${user.id}. `, err);
     throw new UnexpectedError(`Unexpected error happened when updating user ${err}`);
   }
 };

@@ -8,14 +8,14 @@ if (process.env.NODE_ENV !== "testing") {
     database = new Sequelize(process.env.DATABASE_URL, {
       dialect: "postgres",
       operatorsAliases: Sequelize.Op,
-      //operatorsAliases: 0,
+      // operatorsAliases: 0,
       define: { timestamp: false },
     });
   } else {
     database = new Sequelize(process.env.DATABASE_URL, {
       dialect: "postgres",
       operatorsAliases: Sequelize.Op,
-      //operatorsAliases: 0,
+      // operatorsAliases: 0,
       define: { timestamp: false },
       ssl: true,
       dialectOptions: {

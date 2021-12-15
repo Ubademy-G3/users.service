@@ -31,7 +31,7 @@ module.exports = class extends UserRepository {
     // combines the build and save methods
     const newUser = await UserDb.create(user);
     logger.info("Added new user");
-    logger.debug("Data of the new user: "+ user);
+    logger.debug(`Data of the new user: ${user}`);
 
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
@@ -42,7 +42,7 @@ module.exports = class extends UserRepository {
 
   static async getUserById(id) {
     const user = await UserDb.findByPk(id);
-    logger.debug("Getting user with id: "+ id);
+    logger.debug(`Getting user with id: ${id}`);
 
     if (user && Object.keys(user).length !== 0) {
       return new UserModel(
@@ -75,7 +75,7 @@ module.exports = class extends UserRepository {
     });
 
     const user = result[0];
-    logger.debug("Get user with email: "+ email);
+    logger.debug(`Get user with email: ${email}`);
 
     if (user && Object.keys(user).length !== 0) {
       return new UserModel(
@@ -110,7 +110,7 @@ module.exports = class extends UserRepository {
   }
 
   static async removeUser(id) {
-    logger.debug("Deleting user "+ id);
+    logger.debug(`Deleting user ${id}`);
     const result = await UserDb.destroy({
       where: {
         id,
@@ -129,7 +129,7 @@ module.exports = class extends UserRepository {
   }
 
   static async updateUser(userInfo) {
-    logger.debug("Updating user "+ userInfo.id);
+    logger.debug(`Updating user ${userInfo.id}`);
     const result = await UserDb.update({
       email: userInfo.email,
       firstName: userInfo.firstserverName,
@@ -151,7 +151,7 @@ module.exports = class extends UserRepository {
       where: {
         id: userInfo.id,
       },
-    });    
+    });
     return result;
   }
 
@@ -162,7 +162,7 @@ module.exports = class extends UserRepository {
         params.passwordChanged = userWithId.passwordChanged + 1;
       }
     }
-    logger.debug("Patching user: "+ id);
+    logger.debug(`Patching user: ${id}`);
     const result = await UserDb.update(params,
       {
         where: {
