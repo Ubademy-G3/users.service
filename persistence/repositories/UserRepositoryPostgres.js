@@ -1,6 +1,7 @@
 const UserModel = require("../../domain/UserModel");
 const db = require("../../infrastructure/db/Database");
 const UserRepository = require("../../domain/UserRepository");
+const logger = require("../../application/logger")("UserRepositoryPostgres.js");
 
 const UserDb = db.users;
 // thats for operators like or, and, ecc. in conditionals like findAll where
@@ -8,6 +9,7 @@ const UserDb = db.users;
 
 module.exports = class extends UserRepository {
   static async createUser(userInfo) {
+    logger.debug("Creating new user");
     const user = {
       email: userInfo.email,
       firstName: userInfo.firstName,
@@ -28,6 +30,8 @@ module.exports = class extends UserRepository {
 
     // combines the build and save methods
     const newUser = await UserDb.create(user);
+    logger.info("Added new user");
+    logger.debug(`Data of the new user: ${user}`);
 
     return new UserModel(newUser.id, newUser.email, newUser.firstName, newUser.lastName,
       newUser.rol, newUser.location, newUser.interests, newUser.profilePictureUrl,
@@ -38,6 +42,7 @@ module.exports = class extends UserRepository {
 
   static async getUserById(id) {
     const user = await UserDb.findByPk(id);
+    logger.debug(`Getting user with id: ${id}`);
 
     if (user && Object.keys(user).length !== 0) {
       return new UserModel(
@@ -70,6 +75,7 @@ module.exports = class extends UserRepository {
     });
 
     const user = result[0];
+    logger.debug(`Get user with email: ${email}`);
 
     if (user && Object.keys(user).length !== 0) {
       return new UserModel(
@@ -99,10 +105,12 @@ module.exports = class extends UserRepository {
       where: a,
       truncate: false,
     });
+    logger.debug("Getting all users");
     return users;
   }
 
   static async removeUser(id) {
+    logger.debug(`Deleting user ${id}`);
     const result = await UserDb.destroy({
       where: {
         id,
@@ -112,6 +120,7 @@ module.exports = class extends UserRepository {
   }
 
   static async removeAllUsers() {
+    logger.debug("Deleting all users");
     const result = await UserDb.destroy({
       where: {},
       truncate: false,
@@ -120,6 +129,7 @@ module.exports = class extends UserRepository {
   }
 
   static async updateUser(userInfo) {
+    logger.debug(`Updating user ${userInfo.id}`);
     const result = await UserDb.update({
       email: userInfo.email,
       firstName: userInfo.firstserverName,
@@ -152,6 +162,7 @@ module.exports = class extends UserRepository {
         params.passwordChanged = userWithId.passwordChanged + 1;
       }
     }
+    logger.debug(`Patching user: ${id}`);
     const result = await UserDb.update(params,
       {
         where: {
