@@ -33,6 +33,8 @@ ENV DD_APM_ENABLED=true
 ENV PORT=3000
 
 COPY package*.json /app/
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x  | bash -
+RUN apt-get -y install nodejs
 RUN npm install
 
 COPY . /app/
