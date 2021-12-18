@@ -87,16 +87,19 @@
                                     "type": "string"
                                 },
                                 "registerType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "require": false
                                 },
                                 "loginType": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "require": false
                                 },
                                 "passwordChanged": {
                                     "type": "number"
                                 },
                                 "walletId": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "uuid"
                                 }
                             }
                         }
@@ -167,7 +170,8 @@
                                     "type": "number"
                                 },
                                 "walletId": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "uuid"
                                 }
                             }
                         }
@@ -280,7 +284,8 @@
                                         "type": "number"
                                     },
                                     "walletId": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "format": "uuid"
                                     }
                                 }
                             }
@@ -427,7 +432,8 @@
                                     "type": "number"
                                 },
                                 "walletId": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "uuid"
                                 }
                             }
                         }
@@ -521,7 +527,8 @@
                                     "type": "number"
                                 },
                                 "walletId": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "uuid"
                                 }
                             }
                         }
@@ -652,7 +659,8 @@
                                     "require": false
                                 },
                                 "walletId": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "uuid"
                                 }
                             }
                         }

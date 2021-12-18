@@ -50,11 +50,15 @@ module.exports = (database, Sequelize) => {
       type: Sequelize.ENUM({
         values: ["google", "not-google"],
       }),
+      allowNull: true,
+      defaultValue: "not-google",
     },
     loginType: {
       type: Sequelize.ENUM({
         values: ["google", "not-google"],
       }),
+      allowNull: true,
+      defaultValue: "not-google",
     },
     passwordChanged: {
       type: Sequelize.INTEGER,
