@@ -63,13 +63,13 @@ jobs:
           run: heroku container:login
 
         - name: Tag container
-          run: docker tag users.service registry.heroku.com/staging-users-service/web
+          run: docker tag users.service registry.heroku.com/staging-users-service-v2/web
 
         - name: Push container
-          run: docker push registry.heroku.com/staging-users-service/web
+          run: docker push registry.heroku.com/staging-users-service-v2/web
 
         - name: Release container
-          run: heroku container:release web --app staging-users-service
+          run: heroku container:release web --app staging-users-service-v2
 
         - name: Set NODE_ENV to stage
-          run: heroku config:set NODE_ENV=stage --app staging-users-service
+          run: heroku config:set NODE_ENV=stage --app staging-users-service-v2
