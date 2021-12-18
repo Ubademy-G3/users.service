@@ -215,6 +215,18 @@
                         "name": "email",
                         "in": "query",
                         "require": false
+                    },
+                    {
+                        "name": "idList",
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "collectionFormat": "csv",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "require": false
                     }
                 ],
                 "responses": {

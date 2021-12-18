@@ -100,11 +100,43 @@ module.exports = class extends UserRepository {
     return null;
   }
 
-  static async getAllUsers(a) {
-    const users = await UserDb.findAll({
-      where: a,
-      truncate: false,
-    });
+  static async getAllUsers(params) {
+    const emailPresent = {}.propertyIsEnumerable.call(params, "email");
+    const idsPresent = {}.propertyIsEnumerable.call(params, "idList");
+    let users;
+    if (!emailPresent && !idsPresent) {
+      logger.debug("Get all users without params");
+      users = await UserDb.findAll();
+    }
+
+    if (emailPresent && !idsPresent) {
+      logger.debug(`Get all users with email: ${params.email}`);
+      users = await UserDb.findAll({
+        where: {
+          email: params.email,
+        },
+        truncate: false,
+      });
+    }
+
+    if (!emailPresent && idsPresent) {
+      logger.debug(`Get all users with IDs: [${params.idList}]`);
+      users = await UserDb.findAll({
+        where: {
+          id: params.idList.split(","),
+        },
+      });
+    }
+
+    if (emailPresent && idsPresent) {
+      logger.debug(`Get all users with IDs: [${params.idList}] and email: ${params.email}`);
+      users = await UserDb.findAll({
+        where: {
+          email: params.email,
+          id: params.idList.split(","),
+        },
+      });
+    }
     logger.debug("Getting all users");
     return users;
   }
