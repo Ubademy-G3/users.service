@@ -754,6 +754,113 @@
                     }
                 }
             }                        
-        }        
+        },
+        "/users/list/{idList}":{
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get user by List",
+                "description": "Returns a user based on an ID List",
+                "parameters": [
+                    {
+                        "name": "idList",
+                        "in": "path",
+                        "description": "List of IDs of the users to fetch",
+                        "required": true
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The users",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "format":"uuid"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "rol": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "interests": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "profilePictureUrl": {
+                                        "type": "string"
+                                    },
+                                    "subscription": {
+                                        "type": "string"
+                                    },
+                                    "subscriptionExpirationDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "favoriteCourses": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format":"uuid"
+                                        }
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "registerType": {
+                                        "type": "string"
+                                    },
+                                    "loginType": {
+                                        "type": "string"
+                                    },
+                                    "passwordChanged": {
+                                        "type": "number"
+                                    },
+                                    "walletId": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
     }
 }     

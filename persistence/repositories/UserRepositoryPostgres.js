@@ -5,7 +5,7 @@ const logger = require("../../application/logger")("UserRepositoryPostgres.js");
 
 const UserDb = db.users;
 // thats for operators like or, and, ecc. in conditionals like findAll where
-// const Op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;
 
 module.exports = class extends UserRepository {
   static async createUser(userInfo) {
@@ -63,6 +63,42 @@ module.exports = class extends UserRepository {
         user.passwordChanged,
         user.wallet_id,
       );
+    }
+    return null;
+  }
+
+  static async getUserByList(idList) {
+    const result = await UserDb.findAll({
+      where: {
+        id: {
+          [Op.or]: [idList]
+          },
+      },
+    });
+
+    if (result[0] && Object.keys(result[0]).length !== 0) {
+      var userList = []
+      for (let user of result) {
+        userList.append(new UserModel(
+          user[0].id,
+          user[0].email,
+          user[0].firstName,
+          user[0].lastName,
+          user[0].rol,
+          user[0].location,
+          user[0].interests,
+          user[0].profilePictureUrl,
+          user[0].subscription,
+          user[0].subscriptionExpirationDate,
+          user[0].favoriteCourses,
+          user[0].description,
+          user[0].registerType,
+          user[0].loginType,
+          user[0].passwordChanged,
+          user[0].wallet_id,
+        ));
+      }
+      return userList
     }
     return null;
   }

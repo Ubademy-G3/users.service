@@ -13,6 +13,9 @@ router.get("/", users.getAll);
 // Retrieve a single user with id
 router.get("/:id", users.getById);
 
+// Retrieve all users by list
+router.get("/list/", users.getByList);
+
 // Update a user with id
 router.put("/:id", users.update);
 

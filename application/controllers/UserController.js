@@ -2,6 +2,7 @@ const { validate } = require("jsonschema");
 const createUser = require("../useCases/CreateNewUser");
 const getAllUsers = require("../useCases/GetAllUsers");
 const getUserById = require("../useCases/GetUserById");
+const getUserByList = require("../useCases/GetUserByList");
 const removeAllUsers = require("../useCases/RemoveAllUsers");
 const removeUser = require("../useCases/RemoveUser");
 const updateUser = require("../useCases/UpdateUser");
@@ -66,6 +67,26 @@ exports.getById = (req, res) => {
   }
   const repository = req.app.serviceLocator.userRepository;
   getUserById(repository, req.params)
+    .then((user) => res.status(200).json(serializer(user)))
+    .catch((err) => {
+      if (err instanceof UserNotFound) {
+        return res.status(404).send({ message: err.message });
+      }
+      logger.error(`Critical error while getting user by id: ${err.message}`);
+      return res.status(500).send({ message: err.message });
+    });
+  return 0;
+};
+
+exports.getByList = (req, res) => {
+  const apiKey = req.get("authorization");
+  logger.debug("Get user by list");
+  if (!apiKey || apiKey !== process.env.USERSERVICE_APIKEY) {
+    logger.warn("Unauthorized");
+    return res.status(401).send({ message: "Unauthorized" });
+  }
+  const repository = req.app.serviceLocator.userRepository;
+  getUserByList(repository, req.params)
     .then((user) => res.status(200).json(serializer(user)))
     .catch((err) => {
       if (err instanceof UserNotFound) {

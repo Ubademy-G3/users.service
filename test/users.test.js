@@ -175,6 +175,43 @@ describe("userController", () => {
           expect(res.body).toEqual({ message: "Unauthorized" });
         });
       });
+
+      describe("when invalid ids getting user by list", () => {
+        it("should respond with user not found status and body", async () => {
+          spyUserRepository.getUserByList = jest
+            .spyOn(userRepository, "getUserByList")
+            .mockReturnValueOnce(null);
+
+          res = await request.get(`${path}/list/banana`).set("authorization", "47M47m");
+          expect(res.status).toEqual(404);
+          expect(res.body).toEqual({ message: "User Id not found" });
+        });
+      });
+
+      describe("when users from list exist", () => {
+        it("should respond with correct status and body", async () => {
+          spyUserRepository.getUserByList = jest
+            .spyOn(userRepository, "getUserByList")
+            .mockReturnValueOnce(users[0]);
+
+          res = await request.get(`${path}/list/${users[0].id}`).set("authorization", "47M47m");
+          expect(res.status).toEqual(200);
+          expect(res.header["content-type"]).toMatch(/json/);
+          expect(res.body).toEqual(users[0]);
+        });
+      });
+
+      describe("when invalid apikey getting user by list", () => {
+        it("should respond with unauthorized error status and body", async () => {
+          spyUserRepository.getUserByList = jest
+            .spyOn(userRepository, "getUserByList")
+            .mockReturnValueOnce(users[0]);
+
+          res = await request.get(`${path}/list/${users[0].id}`).set("authorization", "banana");
+          expect(res.status).toEqual(401);
+          expect(res.body).toEqual({ message: "Unauthorized" });
+        });
+      });
     });
 
     describe("POST", () => {
