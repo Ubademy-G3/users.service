@@ -12,7 +12,9 @@ module.exports = async (repository, params) => {
   try {
     return user;
   } catch (err) {
+    /* istanbul ignore next */
     logger.error(`Critical error while getting user ${params.id}: `, err);
+    /* istanbul ignore next */
     throw new UnexpectedError(`Unexpected error happened when getting user ${err}`);
   }
 };

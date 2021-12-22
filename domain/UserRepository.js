@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 module.exports = class Repository {
   static createUser() {
     throw new Error("Method Not implemented");

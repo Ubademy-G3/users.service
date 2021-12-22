@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 const Sequelize = require("sequelize");
 const seq = require("./Sequelize");
 

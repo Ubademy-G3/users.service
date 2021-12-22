@@ -10,6 +10,7 @@ module.exports = async (repository, userInfoBase) => {
     const expiration = new Date(now.setMonth(now.getMonth() + 1));
     userInfo.subscriptionExpirationDate = expiration;
   } else {
+    /* istanbul ignore next */
     userInfo.subscriptionExpirationDate = null;
   }
 

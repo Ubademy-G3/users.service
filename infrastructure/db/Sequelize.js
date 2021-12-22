@@ -1,5 +1,5 @@
 // User Schema
-
+/* istanbul ignore file */
 module.exports = (database, Sequelize) => {
   const User = database.define("user", {
     id: {
