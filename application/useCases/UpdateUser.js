@@ -24,7 +24,9 @@ module.exports = async (repository, params, userInfoBase) => {
       logger.info("User updated successfully");
       return { message: "User updated successfully" };
     }
+    /* istanbul ignore next */
     logger.error(`Critical error while updating user ${user.id}`);
+    /* istanbul ignore next */
     throw new UnexpectedError("Unexpected error happened when updating user");
   } catch (err) {
     logger.error(`Critical error while updating user ${user.id}. `, err);

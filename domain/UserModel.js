@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 module.exports = class User {
   constructor(UUID, email, firstName, lastName, rol,
     location, interests, profilePictureUrl, subscription,
