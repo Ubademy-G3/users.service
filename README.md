@@ -60,6 +60,12 @@ Service dedicated to the management of users: enrollment, unsubscription, modifi
     └── users.test.js
 ```
 
+# Tech Stack
+
+* NodeJS
+* Express (as web framework for NodeJS applications)
+*MongoDB (as NoSQL database)
+
 # Local Environment 
 
 ## Requirements 
