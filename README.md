@@ -64,7 +64,7 @@ Service dedicated to the management of users: enrollment, unsubscription, modifi
 
 * NodeJS
 * Express (as web framework for NodeJS applications)
-*MongoDB (as NoSQL database)
+* MongoDB (as NoSQL database)
 
 # Local Environment 
 
